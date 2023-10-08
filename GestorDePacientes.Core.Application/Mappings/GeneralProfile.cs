@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GestorDePacientes.Core.Application.ViewModels.RolViewModels;
 using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using GestorDePacientes.Core.Domain.Entities;
 using System;
@@ -27,6 +28,12 @@ namespace GestorDePacientes.Core.Application.Mappings
                 .ForMember(x => x.Creaty, opt => opt.Ignore())
                 .ForMember(x => x.CreatyBy, opt => opt.Ignore());
 
+            CreateMap<Rol, RolViewModel>()
+                .ReverseMap()
+                .ForMember(x => x.LastModified, opt => opt.Ignore())
+                .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
+                .ForMember(x => x.Creaty, opt => opt.Ignore())
+                .ForMember(x => x.CreatyBy, opt => opt.Ignore());
 
         }
     }

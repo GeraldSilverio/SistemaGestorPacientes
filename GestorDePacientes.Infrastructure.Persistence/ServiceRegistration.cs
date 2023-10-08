@@ -26,6 +26,8 @@ namespace GestorDePacientes.Infrastructure.Persistence
 
             #region Repositories
             services.AddTransient(typeof(IGenericRepositoryAsync<>),typeof(GenericRepositoryAsync<>));
+            services.AddTransient<IUserRepository, UserRepositoryAsync>();
+            services.AddTransient<IRolRepository, RolRepository>();
 
             #endregion
         }

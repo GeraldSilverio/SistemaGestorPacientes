@@ -1,0 +1,88 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
+@using GestorDePacientes.Core.Application.ViewModels.RolViewModels;
+
+
+@model SaveUserViewModel
+
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save User";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class=" card">
+                <div class="card-header bg-success text-light text-center">
+                    <h4>@(editMode ? $"Editando Usuario: {Model.UserName}" : "Nuevo Usuario")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="User" asp-action="@(editMode ? "Edit":"Create")">
+
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido: </label>
+                            <input asp-for="LastName" class="form-control" autocomplete="off" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Correo Electronico: </label>
+                            <input type="email" step="any" asp-for="Email" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label">Nombre de Usuario: </label>
+                            <input asp-for="UserName" class="form-control" autocomplete="off" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña: </label>
+                            <input type="password" step="any" asp-for="Password" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label">Confirmar Contraseña: </label>
+                            <input type="password" step="any" asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdRol" class="form-label">Rol del Usuario: </label>
+                            <select asp-for="IdRol" class="form-select">
+                                <option selected>Rol del Usuario</option>
+                                @foreach (RolViewModel rol in ViewBag.Rols)
+                                {
+                                    <option asp-for="IdProduction" value="@rol.Id">@rol.Name</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="IdRol"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary float-end ms-2">Guardar</button>
+                        <a asp-controller="User" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
+
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

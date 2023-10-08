@@ -12,6 +12,8 @@ namespace GestorDePacientes.Core.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #region Services
             services.AddTransient(typeof(IGenericService<,,>), typeof(GenericService<,,>));
+            services.AddTransient<IRolServices, RolServices>();
+            services.AddTransient<IUserServices, UserServices>();
             #endregion
         }
     }

@@ -1,4 +1,5 @@
-﻿using GestorDePacientes.Core.Domain.Entities;
+﻿using GestorDePacientes.Core.Domain.Common;
+using GestorDePacientes.Core.Domain.Entities;
 using GestorDePacientes.Infrastructure.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,27 @@ namespace GestorDePacientes.Infrastructure.Persistence.Context
         {
 
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.Creaty = DateTime.Now;
+                        entry.Entity.CreatyBy = "DefaultAppUser";
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.LastModified = DateTime.Now;
+                        entry.Entity.LastModifiedBy = "DefaultAppUser";
+                        break;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

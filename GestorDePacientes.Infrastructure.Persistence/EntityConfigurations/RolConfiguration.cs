@@ -15,6 +15,7 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
         {
             builder.ToTable("Rol");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.LastModifiedBy).IsRequired(false);
         }
     }
 }

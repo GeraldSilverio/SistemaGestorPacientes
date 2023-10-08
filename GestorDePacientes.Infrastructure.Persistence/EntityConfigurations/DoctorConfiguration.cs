@@ -11,6 +11,7 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.ToTable("Doctor");
             builder.HasKey(x => x.Id);
             builder.HasIndex(x => x.Identification).IsUnique();
+            builder.Property(x => x.LastModifiedBy).IsRequired(false);
         }
     }
 }

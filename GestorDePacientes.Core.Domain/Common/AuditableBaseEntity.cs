@@ -11,7 +11,8 @@ namespace GestorDePacientes.Core.Domain.Common
         public int Id { get; set; }
         public string CreatyBy { get; set; } = null!;
         public DateTime Creaty {  get; set; }
-        public string LastModifiedBy { get; set; } = null!;
+        public string LastModifiedBy { get; set; }
         public DateTime LastModified {  get; set; }
+
     }
 }
