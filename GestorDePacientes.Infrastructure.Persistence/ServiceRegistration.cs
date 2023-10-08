@@ -1,4 +1,6 @@
-﻿using GestorDePacientes.Infrastructure.Persistence.Context;
+﻿using GestorDePacientes.Core.Application.Interfaces.Repositories;
+using GestorDePacientes.Infrastructure.Persistence.Context;
+using GestorDePacientes.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,11 @@ namespace GestorDePacientes.Infrastructure.Persistence
                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                m => m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
             }
+            #endregion
+
+            #region Repositories
+            services.AddTransient(typeof(IGenericRepositoryAsync<>),typeof(GenericRepositoryAsync<>));
+
             #endregion
         }
     }

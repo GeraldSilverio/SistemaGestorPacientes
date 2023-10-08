@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Services\" />
-    <Folder Include="Interfaces\Repositories\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
   </ItemGroup>
