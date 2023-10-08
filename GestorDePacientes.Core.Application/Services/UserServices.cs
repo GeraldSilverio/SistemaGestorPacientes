@@ -13,10 +13,25 @@ namespace GestorDePacientes.Core.Application.Services
 {
     public class UserServices : GenericService<SaveUserViewModel, UserViewModel, User>, IUserServices
     {
-        public UserServices(IMapper mapper, IGenericRepositoryAsync<User> repositoryAsync) : base(mapper, repositoryAsync)
+        private readonly IUserRepository _userRepository;
+        public UserServices(IMapper mapper, IGenericRepositoryAsync<User> repositoryAsync, IUserRepository userRepository) : base(mapper, repositoryAsync)
         {
+            _userRepository = userRepository;
         }
+        public async Task<List<UserViewModel>> GetAllViewModelWithInclude()
+        {
+            var users = await _userRepository.GetAllWithIncludeAsync(new List<string> { "Rol" });
 
-
+            return users.Select(user => new UserViewModel
+            {
+                Id = user.Id,
+                Name = user.Name,
+                LastName = user.LastName,
+                IdRol = user.Rol.Id,
+                RolName = user.Rol.Name,
+                Email = user.Email,
+                UserName = user.UserName
+            }).ToList();
+        }
     }
 }

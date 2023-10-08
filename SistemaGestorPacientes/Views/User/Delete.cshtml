@@ -1,0 +1,28 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
+@model SaveUserViewModel
+
+@{
+    ViewData["title"] = "Delete";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3 mb-5">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <h3>Eliminando al Usuario: @Model.UserName</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <h3>Estas seguro que deseas eliminar al usuario?</h3>
+                        <button class="btn btn-danger float-end ms-2" type="submit" asp-controller="User" asp-action="Deletes" asp-route-id="@Model.Id">ELIMINAR</button>
+                        <a class="btn btn-warning float-end" asp-controller="User" asp-action="Index">Cancelar</a>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

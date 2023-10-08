@@ -16,6 +16,8 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.ToTable("PatientLabTests");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.LastModifiedBy).IsRequired(false);
+            builder.Property(x => x.CreatyBy).IsRequired(false);
+
 
             builder.HasOne(x => x.Patient)
                 .WithMany(x => x.PatientLabTests)

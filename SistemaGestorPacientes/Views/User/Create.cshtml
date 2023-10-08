@@ -14,12 +14,12 @@
     <div class="row">
         <div class="col-6 offset-3">
             <div class=" card">
-                <div class="card-header bg-success text-light text-center">
+                <div class="card-header bg-primary text-light text-center">
                     <h4>@(editMode ? $"Editando Usuario: {Model.UserName}" : "Nuevo Usuario")</h4>
                 </div>
                 <div class="card-body">
 
-                    <form method="post" asp-controller="User" asp-action="@(editMode ? "Edit":"Create")">
+                    <form method="post" asp-controller="User" asp-action="@(editMode ? "Update":"Create")">
 
 
                         <div class="mb-3">
@@ -31,6 +31,7 @@
                         <div class="mb-3">
                             <label asp-for="LastName" class="form-label">Apellido: </label>
                             <input asp-for="LastName" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
@@ -42,18 +43,19 @@
                         <div class="mb-3">
                             <label asp-for="UserName" class="form-label">Nombre de Usuario: </label>
                             <input asp-for="UserName" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
                             <label asp-for="Password" class="form-label">Contraseña: </label>
-                            <input type="password" step="any" asp-for="Password" class="form-control" autocomplete="off" />
+                            <input type="text" step="any" asp-for="Password" class="form-control" autocomplete="off" />
                             <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
 
                         <div class="mb-3">
                             <label asp-for="ConfirmPassword" class="form-label">Confirmar Contraseña: </label>
-                            <input type="password" step="any" asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
+                            <input type="text" step="any" asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
                             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
 

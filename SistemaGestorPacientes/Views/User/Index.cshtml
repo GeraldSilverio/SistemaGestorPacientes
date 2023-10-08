@@ -10,17 +10,16 @@
 
     <div class="row">
         <div class="col-12 text-end mt-2 mb-2">
-            <a class="btn btn-outline-primary" asp-controller="User" asp-action="Create">Create User</a>
-            <a class="btn btn-outline-primary ms-2" asp-controller="User" asp-action="Create">Create Rol</a>
+            <a class="btn btn-primary" asp-controller="User" asp-action="Create">CREAR USUARIO</a>
         </div>
 
         <div class="col-12">
             <div class="card">
-                <div class="card-header text-light bg-success">
+                <div class="card-header text-light bg-primary">
                     <h3 class="text-center">LISTA DE USUARIOS CREADOS</h3>
                 </div>
                 <div class="card-body">
-                    <div >
+                    <div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -33,6 +32,25 @@
 
                                 </tr>
                             </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.RolName</td>
+                                        <td>
+                                            <a class="btn btn-warning " asp-controller="User" asp-action="Update" asp-route-id="@item.Id">EDITAR</a>
+                                            <a class="btn btn-danger " asp-controller="User" asp-action="Delete" asp-route-id="@item.Id">ELIMINAR</a>
+                                            
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
                         </table>
                     </div>
 

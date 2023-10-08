@@ -18,6 +18,8 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.HasIndex(x => x.UserName).IsUnique();
             builder.HasIndex(x => x.Email).IsUnique();
             builder.Property(x => x.LastModifiedBy).IsRequired(false);
+            builder.Property(x => x.CreatyBy).IsRequired(false);
+
 
             builder.HasOne(x=>x.Rol)
                 .WithMany(x=>x.Users)

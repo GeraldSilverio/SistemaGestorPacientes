@@ -17,6 +17,8 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.HasIndex(x => x.Identification).IsUnique();
             builder.Property(x => x.LastModifiedBy).IsRequired(false);
+            builder.Property(x => x.CreatyBy).IsRequired(false);
+
 
 
         }

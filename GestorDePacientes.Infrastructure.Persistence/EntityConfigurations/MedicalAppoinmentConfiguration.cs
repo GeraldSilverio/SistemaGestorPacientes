@@ -17,6 +17,8 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.Property(x=> x.HourOfAppoinment).HasColumnType("time");
             builder.Property(x => x.LastModifiedBy).IsRequired(false);
+            builder.Property(x => x.CreatyBy).IsRequired(false);
+
 
             //Relacion con el estado de la cita, cita tener un estado y un estado muchas citas.
             builder.HasOne(x => x.AppoinmentStatus)
