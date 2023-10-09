@@ -78,6 +78,13 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    var userExisted = await _userServices.GetById(vm.Id);
+                    if((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName))  
+                    {
+                        await _userServices.Update(vm, vm.Id);
+                        return RedirectToRoute(new { controller = "User", action = "Index" });
+                    }
+                    ViewBag.Rols = await _rolServices.GetAll();
                     return View("Create", vm);
                 }
                 await _userServices.Update(vm,vm.Id);

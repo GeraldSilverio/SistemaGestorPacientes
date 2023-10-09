@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GestorDePacientes.Core.Application.Validations;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestorDePacientes.Core.Application.ViewModels.UserViewModels
@@ -17,6 +18,7 @@ namespace GestorDePacientes.Core.Application.ViewModels.UserViewModels
         public string Email { get; set; } = null!;
         [Required(ErrorMessage = "Este campo es requerido")]
         [DataType(DataType.Text)]
+        [UserNameValidation]
         public string UserName { get; set; } = null!;
         [Required(ErrorMessage = "Este campo es requerido")]
 

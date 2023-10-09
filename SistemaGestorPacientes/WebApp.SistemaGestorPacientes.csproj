@@ -21,4 +21,9 @@
     <ProjectReference Include="..\GestorDePacientes.Infrastructure.Persistence\GestorDePacientes.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Doctor\" />
+    <Folder Include="wwwroot\Images\Patient\" />
+  </ItemGroup>
+
 </Project>

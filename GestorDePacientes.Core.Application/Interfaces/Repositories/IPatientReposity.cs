@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace GestorDePacientes.Core.Application.Interfaces.Repositories
 {
-    public interface IUserRepository:IGenericRepositoryAsync<User>
+    public interface IPatientReposity : IGenericRepositoryAsync<Patient>
     {
-        bool ValidateUserName(string userName);
     }
 }

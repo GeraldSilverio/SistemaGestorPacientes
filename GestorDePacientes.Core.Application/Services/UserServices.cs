@@ -33,5 +33,10 @@ namespace GestorDePacientes.Core.Application.Services
                 UserName = user.UserName
             }).ToList();
         }
+
+        public bool ValidateUserName(string userName)
+        {
+           return  _userRepository.ValidateUserName(userName);
+        }
     }
 }
