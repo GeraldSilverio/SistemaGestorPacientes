@@ -12,12 +12,11 @@
         <div class="col-6 offset-3">
             <div class=" card">
                 <div class="card-header bg-primary text-light text-center">
-                    <h4>@(editMode ? $"Editando Paciente: {Model.Name}" : "Nuevo Paciente")</h4>
+                    <h4>@(editMode ? $"Editando Paciente: {Model.Name}" : "Creando Un Paciente")</h4>
                 </div>
                 <div class="card-body">
 
-                    <form method="post" asp-controller="Patient" asp-action="@(editMode ? "Update":"Create")">
-
+                    <form method="post" asp-controller="Patient" asp-action="@(editMode ? "Update":"Create")" enctype="multipart/form-data">
 
                         <div class="mb-3">
                             <label asp-for="Name" class="form-label">Nombres: </label>
@@ -38,14 +37,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="File" class="form-label">Seleccione una Imagen:</label>
+                            <label asp-for="File" class="form-label">Seleccione un archivo:</label>
                             @if (editMode)
                             {
                                 <input asp-for="File" class="form-control" />
                             }
                             else
                             {
-                                <input  asp-for="File" class="form-control" />
+                                <input required asp-for="File" class="form-control" />
                             }
 
                             <span asp-validation-for="File" class="text-danger"></span>

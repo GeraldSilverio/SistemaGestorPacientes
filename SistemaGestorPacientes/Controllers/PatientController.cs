@@ -1,4 +1,5 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
+using GestorDePacientes.Core.Application.Services;
 using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,9 +27,13 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                SavePatientViewModel patientCreated = await _patientService.Add(vm);
 
-                var patientCreated = await _patientService.Add(vm);
-                patientCreated.ImageUrl = "";
+                if(patientCreated != null && patientCreated.Id !=0)
+                {
+                    patientCreated.ImageUrl = _patientService.UplpadFile(vm.File, patientCreated.Id);
+                    await _patientService.Update(patientCreated, patientCreated.Id);
+                }
                 return RedirectToRoute(new { controller = "Patient", action = "Index" });
 
             }

@@ -13,7 +13,7 @@ namespace GestorDePacientes.Core.Application.Services
 {
     public class RolServices : GenericService<SaveRolViewModel, RolViewModel, Rol>, IRolServices
     {
-        public RolServices(IMapper mapper, IGenericRepositoryAsync<Rol> repositoryAsync) : base(mapper, repositoryAsync)
+        public RolServices(IMapper mapper, IRolRepository rolRepository) : base(mapper, rolRepository)
         {
         }
     }

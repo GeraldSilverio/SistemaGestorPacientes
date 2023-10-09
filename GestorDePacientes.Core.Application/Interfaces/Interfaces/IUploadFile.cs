@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace GestorDePacientes.Core.Application.Interfaces.Interfaces
 {
     public interface IUploadFile
     {
-        string UplpadFile(string file,int id);
+        string UplpadFile(IFormFile file, int id, bool isEditMode = false, string imagePath = "");
     }
 }

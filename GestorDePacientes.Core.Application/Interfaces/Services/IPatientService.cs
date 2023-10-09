@@ -1,4 +1,5 @@
-﻿using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
+﻿using GestorDePacientes.Core.Application.Interfaces.Interfaces;
+using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
 using GestorDePacientes.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,10 @@ using System.Threading.Tasks;
 
 namespace GestorDePacientes.Core.Application.Interfaces.Services
 {
-    public interface IPatientService:IGenericService<SavePatientViewModel,PatientViewModel,Patient>
+    public interface IPatientService : IGenericService<SavePatientViewModel, PatientViewModel, Patient>,IUploadFile
     {
+
     }
+
+
 }

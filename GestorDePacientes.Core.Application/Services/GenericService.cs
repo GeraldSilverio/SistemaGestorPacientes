@@ -14,7 +14,6 @@ namespace GestorDePacientes.Core.Application.Services
         where Model : class
         where ViewModel : class
 
-        
     {
         private readonly IMapper _mapper;
         private readonly IGenericRepositoryAsync<Model> _repositoryAsync;
@@ -29,7 +28,7 @@ namespace GestorDePacientes.Core.Application.Services
         {
             Model entity = _mapper.Map<Model>(viewModel);
             entity = await _repositoryAsync.AddAsync(entity);
-            SaveViewModel entityVm = _mapper.Map<SaveViewModel>(viewModel);
+            SaveViewModel entityVm = _mapper.Map<SaveViewModel>(entity);
             return entityVm;
         }
 
@@ -41,8 +40,8 @@ namespace GestorDePacientes.Core.Application.Services
 
         public virtual async Task<List<ViewModel>> GetAll()
         {
-           var entityList = await _repositoryAsync.GetAllAsync();
-           return _mapper.Map<List<ViewModel>>(entityList);
+            var entityList = await _repositoryAsync.GetAllAsync();
+            return _mapper.Map<List<ViewModel>>(entityList);
         }
 
         public virtual async Task<SaveViewModel> GetById(int id)
@@ -54,8 +53,8 @@ namespace GestorDePacientes.Core.Application.Services
 
         public virtual async Task Update(SaveViewModel viewModel, int id)
         {
-           Model entity = _mapper.Map<Model>(viewModel);
-           await _repositoryAsync.UpdateAsync(entity,id);
+            Model entity = _mapper.Map<Model>(viewModel);
+            await _repositoryAsync.UpdateAsync(entity, id);
         }
     }
 }

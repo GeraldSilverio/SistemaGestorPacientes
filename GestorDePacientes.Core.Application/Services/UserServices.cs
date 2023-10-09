@@ -14,7 +14,7 @@ namespace GestorDePacientes.Core.Application.Services
     public class UserServices : GenericService<SaveUserViewModel, UserViewModel, User>, IUserServices
     {
         private readonly IUserRepository _userRepository;
-        public UserServices(IMapper mapper, IGenericRepositoryAsync<User> repositoryAsync, IUserRepository userRepository) : base(mapper, repositoryAsync)
+        public UserServices(IMapper mapper, IUserRepository userRepository) : base(mapper,userRepository)
         {
             _userRepository = userRepository;
         }

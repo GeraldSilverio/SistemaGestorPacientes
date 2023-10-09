@@ -17,8 +17,9 @@ namespace GestorDePacientes.Core.Application.ViewModels.PatientViewModels
         public string Identification { get; set; } = null!;
         public DateTime DateOfBorn { get; set; } =DateTime.Now;
         public string Direction { get; set; } = null!;
-        public IFormFile File { get; set; } = null!;
 
+        [DataType(DataType.Upload)]
+        public IFormFile File { get; set; } = null!;
         public string ImageUrl { get; set; }
         public bool IsSmoker { get; set; }
         public bool IsAllegier { get; set; }
