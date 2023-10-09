@@ -58,7 +58,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteS(int id)
+        public async Task<IActionResult> DeleteP(int id)
         {
             try
             {
@@ -84,6 +84,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                         await _userServices.Update(vm, vm.Id);
                         return RedirectToRoute(new { controller = "User", action = "Index" });
                     }
+
                     ViewBag.Rols = await _rolServices.GetAll();
                     return View("Create", vm);
                 }

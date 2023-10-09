@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <form method="post">
                         <h3>Estas seguro que deseas eliminar al usuario?</h3>
-                        <button class="btn btn-danger float-end ms-2" type="submit" asp-controller="User" asp-action="Deletes" asp-route-id="@Model.Id">ELIMINAR</button>
+                        <button class="btn btn-danger float-end ms-2" type="submit" asp-controller="User" asp-action="DeleteP" asp-route-id="@Model.Id">ELIMINAR</button>
                         <a class="btn btn-warning float-end" asp-controller="User" asp-action="Index">Cancelar</a>
                     </form>
                     

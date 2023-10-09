@@ -13,6 +13,7 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.HasIndex(x => x.Identification).IsUnique();
             builder.Property(x => x.LastModifiedBy).IsRequired(false);
             builder.Property(x => x.CreatyBy).IsRequired(false);
+            builder.Property(x => x.ImageUrl).IsRequired(false);
 
         }
     }

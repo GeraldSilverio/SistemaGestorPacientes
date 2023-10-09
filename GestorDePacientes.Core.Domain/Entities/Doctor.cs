@@ -14,7 +14,7 @@ namespace GestorDePacientes.Core.Domain.Entities
         public string Email { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Identification { get; set; } = null!;
-        public string ImageUrl { get; set; } = null!;
+        public string ImageUrl { get; set; }
 
         //Relacion con tabla MedicalAppoinment
         public ICollection<MedicalAppointment> MedicalAppointments { get; set; } = null!;

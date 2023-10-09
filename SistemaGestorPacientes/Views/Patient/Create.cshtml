@@ -1,0 +1,108 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
+@model SavePatientViewModel
+
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save User";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class=" card">
+                <div class="card-header bg-primary text-light text-center">
+                    <h4>@(editMode ? $"Editando Paciente: {Model.Name}" : "Nuevo Paciente")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Patient" asp-action="@(editMode ? "Update":"Create")">
+
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombres: </label>
+                            <input type="text" asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellidos: </label>
+                            <input asp-for="LastName" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Identification" class="form-label">Cedula: </label>
+                            <input type="email" step="any" asp-for="Identification" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Identification" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Seleccione una Imagen:</label>
+                            @if (editMode)
+                            {
+                                <input asp-for="File" class="form-control" />
+                            }
+                            else
+                            {
+                                <input  asp-for="File" class="form-control" />
+                            }
+
+                            <span asp-validation-for="File" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">Numero de Telefono: </label>
+                            <input asp-for="PhoneNumber" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="DateOfBorn" class="form-label">Fecha de Nacimiento: </label>
+                            <input type="date" step="any" asp-for="DateOfBorn" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="DateOfBorn" class="text-danger"></span>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label asp-for="Direction" class="form-label">Direccion: </label>
+                            <input type="text" step="any" asp-for="Direction" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Direction" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IsAllegier" class="form-label">Eres Alergico?: </label>
+                            <select asp-for="IsAllegier" class="form-select">
+                                <option selected asp-for="IdProduction" value="true">Si</option>
+                                <option asp-for="IdProduction" value="false">No</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="IsSmoker"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IsSmoker" class="form-label">Eres Fumador?: </label>
+                            <select asp-for="IsSmoker" class="form-select">
+                                <option selected asp-for="IdProduction" value="true">Si</option>
+                                <option asp-for="IdProduction" value="false">No</option>
+                            </select>
+                            <span class="text-danger" asp-validation-for="IsSmoker"></span>
+                        </div>
+
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary float-end ms-2">Guardar</button>
+                        <a asp-controller="User" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
+
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

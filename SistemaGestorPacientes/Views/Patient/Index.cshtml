@@ -1,0 +1,67 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
+
+@model List<PatientViewModel>
+
+@{
+    ViewData["Title"] = "User Home";
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12 text-end mt-2 mb-2">
+            <a class="btn btn-primary" asp-controller="Patient" asp-action="Create">CREAR USUARIO</a>
+        </div>
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header text-light bg-primary">
+                    <h3 class="text-center">LISTA DE USUARIOS CREADOS</h3>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Nombre Usuario</th>
+                                    <th scope="col">Tipo Usuario</th>
+                                    <th scope="col">Acciones</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Identification</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.DateOfBorn</td>
+                                        <td>@item.IsSmoker</td>
+                                        <td>@item.IsAllegier</td>
+                                        <td>
+                                            <a class="btn btn-warning " asp-controller="Patient" asp-action="Update" asp-route-id="@item.Id">EDITAR</a>
+                                            <a class="btn btn-danger " asp-controller="Patient" asp-action="Delete" asp-route-id="@item.Id">ELIMINAR</a>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
