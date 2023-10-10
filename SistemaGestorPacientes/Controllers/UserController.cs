@@ -19,17 +19,20 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             return View(await _userServices.GetAllViewModelWithInclude());
         }
+
         public async Task<IActionResult> Create()
         {
             ViewBag.Rols = await _rolServices.GetAll();
             return View(new SaveUserViewModel());
         }
+
         public async Task<IActionResult> Update(int id)
         {
             ViewBag.Rols = await _rolServices.GetAll();
             var entity = await _userServices.GetById(id);
-            return View("Create",entity);
+            return View("Create", entity);
         }
+
         public async Task<IActionResult> Delete(int id)
         {
             var entity = await _userServices.GetById(id);
@@ -44,17 +47,18 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 if (!ModelState.IsValid)
                 {
                     ViewBag.Rols = await _rolServices.GetAll();
-                    return View("Create",vm);
+                    return View("Create", vm);
                 }
 
                 await _userServices.Add(vm);
                 return RedirectToRoute(new { controller = "User", action = "Index" });
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return View("Index", ex.Message);
             }
-            
+
         }
 
         [HttpPost]
@@ -65,12 +69,14 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 await _userServices.Delete(id);
                 return RedirectToRoute(new { controller = "User", action = "Index" });
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return View("Index", ex.Message);
             }
-            
+
         }
+
         [HttpPost]
         public async Task<IActionResult> Update(SaveUserViewModel vm)
         {
@@ -79,7 +85,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 if (!ModelState.IsValid)
                 {
                     var userExisted = await _userServices.GetById(vm.Id);
-                    if((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName))  
+                    if ((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName))
                     {
                         await _userServices.Update(vm, vm.Id);
                         return RedirectToRoute(new { controller = "User", action = "Index" });
@@ -88,10 +94,11 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                     ViewBag.Rols = await _rolServices.GetAll();
                     return View("Create", vm);
                 }
-                await _userServices.Update(vm,vm.Id);
+                await _userServices.Update(vm, vm.Id);
                 return RedirectToRoute(new { controller = "User", action = "Index" });
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return View("Index", ex.Message);
             }

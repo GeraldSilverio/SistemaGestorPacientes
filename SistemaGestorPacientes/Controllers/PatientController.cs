@@ -77,6 +77,34 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             }
         }
 
+        public async Task<IActionResult>Delete(int id)
+        {
+            try
+            {
+                var patient = await _patientService.GetById(id);
+                return View("Delete", patient);
+            }catch(Exception ex)
+            {
+                return View("Index", ex);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteP(int id)
+        {
+            try
+            {
+                await _patientService.Delete(id);
+                return RedirectToRoute(new { controller = "Patient", action = "Index" });
+
+            }
+            catch (Exception ex)
+            {
+                return View("Index", ex.Message);
+            }
+
+        }
+
 
 
 
