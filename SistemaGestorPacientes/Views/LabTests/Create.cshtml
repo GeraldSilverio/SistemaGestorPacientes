@@ -1,0 +1,47 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.LabTestViewModels;
+
+
+
+@model SaveLabTestViewModel
+
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save LabTest";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class=" card">
+                <div class="card-header bg-primary text-light text-center">
+                    <h4>@(editMode ? $"Editando Prueba: {Model.Name}" : "Nueva Prueba")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="LabTests" asp-action="@(editMode ? "Update":"Create")">
+
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre: </label>
+                            <input type="text" asp-for="Name" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary float-end ms-2">Guardar</button>
+                        <a asp-controller="LabTests" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
+
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

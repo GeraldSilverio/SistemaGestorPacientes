@@ -30,6 +30,7 @@ namespace GestorDePacientes.Infrastructure.Persistence
             services.AddTransient<IRolRepository, RolRepository>();
             services.AddTransient<IPatientReposity, PatientRepository>();
             services.AddTransient<IDoctorRepository, DoctorRepository>();
+            services.AddTransient<ILabTestRepository, LabTestRepository>();
 
             #endregion
         }
