@@ -15,8 +15,17 @@
                     <h4>@(editMode ? $"Editando Paciente: {Model.Name}" : "Creando Un Paciente")</h4>
                 </div>
                 <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 text-center">
+                            <div class="imagecenter">
+                                <img src="@Model.ImageUrl" alt="Imagen" width="250" height="250" />
+                            </div>
+                        </div>
+                    </div>
 
                     <form method="post" asp-controller="Patient" asp-action="@(editMode ? "Update":"Create")" enctype="multipart/form-data">
+
+                        
 
                         <div class="mb-3">
                             <label asp-for="Name" class="form-label">Nombres: </label>
@@ -32,7 +41,7 @@
 
                         <div class="mb-3">
                             <label asp-for="Identification" class="form-label">Cedula: </label>
-                            <input type="email" step="any" asp-for="Identification" class="form-control" autocomplete="off" />
+                            <input type="text" step="any" asp-for="Identification" class="form-control" autocomplete="off" />
                             <span asp-validation-for="Identification" class="text-danger"></span>
                         </div>
 
@@ -89,6 +98,7 @@
 
 
                         <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="ImageUrl" />
 
                         <button type="submit" class="btn btn-primary float-end ms-2">Guardar</button>
                         <a asp-controller="User" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
