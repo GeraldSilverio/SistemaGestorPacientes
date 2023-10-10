@@ -4,9 +4,9 @@ using GestorDePacientes.Infrastructure.Persistence.Context;
 
 namespace GestorDePacientes.Infrastructure.Persistence.Repositories
 {
-    public class RolRepository : GenericRepositoryAsync<Rol>, IRolRepository
+    public class DoctorRepository : GenericRepositoryAsync<Doctor>, IDoctorRepository
     {
-        public RolRepository(ApplicationContext dbContext) : base(dbContext)
+        public DoctorRepository(ApplicationContext dbContext) : base(dbContext)
         {
         }
     }

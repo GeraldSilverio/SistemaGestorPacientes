@@ -1,7 +1,7 @@
-﻿@using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
+﻿@using GestorDePacientes.Core.Application.ViewModels.DoctorViewModels;
 
 
-@model List<UserViewModel>
+@model List<DoctorViewModel>
 
 @{
     ViewData["Title"] = "User Home";
@@ -10,54 +10,52 @@
 
     <div class="row">
         <div class="col-12 text-end mt-2 mb-2">
-            <a class="btn btn-primary" asp-controller="User" asp-action="Create">CREAR USUARIO</a>
+            <a class="btn btn-primary" asp-controller="Doctor" asp-action="Create">CREAR DOCTOR</a>
         </div>
 
         <div class="col-12">
             <div class="card">
                 <div class="card-header text-light bg-primary">
-                    <h3 class="text-center">LISTADO DE USUARIOS CREADOS</h3>
+                    <h3 class="text-center">LISTADO DE DOCTORES CREADOS</h3>
                 </div>
                 <div class="card-body">
                     <div>
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">Foto</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Apellido</th>
+                                    <th scope="col">Cedula</th>
+                                    <th scope="col">Telefono</th>
                                     <th scope="col">Correo</th>
-                                    <th scope="col">Nombre Usuario</th>
-                                    <th scope="col">Tipo Usuario</th>
-                                    <th scope="col">Acciones</th>
+                                    <th scope="col" class="text-center">Acciones</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach (var item in Model)
                                 {
                                     <tr>
+                                        <td><img class="image" src="@item.ImageUrl" /></td>
                                         <td>@item.Name</td>
                                         <td>@item.LastName</td>
+                                        <td>@item.Identification</td>
+                                        <td>@item.PhoneNumber</td>
                                         <td>@item.Email</td>
-                                        <td>@item.UserName</td>
-                                        <td>@item.RolName</td>
                                         <td>
-                                            <a class="btn btn-warning " asp-controller="User" asp-action="Update" asp-route-id="@item.Id">EDITAR</a>
-                                            <a class="btn btn-danger " asp-controller="User" asp-action="Delete" asp-route-id="@item.Id">ELIMINAR</a>
+
+                                            <a class="btn btn-warning " asp-controller="Doctor" asp-action="Update" asp-route-id="@item.Id">EDITAR</a>
+                                            <a class="btn btn-danger " asp-controller="Doctor" asp-action="Delete" asp-route-id="@item.Id">ELIMINAR</a>
 
                                         </td>
                                     </tr>
                                 }
-
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-

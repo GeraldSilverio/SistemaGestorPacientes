@@ -1,5 +1,6 @@
-﻿@using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
-@model SavePatientViewModel
+﻿@using GestorDePacientes.Core.Application.ViewModels.DoctorViewModels;
+
+@model SaveDoctorViewModel
 
 @{
     bool editMode = Model.Id == 0 ? false : true;
@@ -12,7 +13,7 @@
         <div class="col-6 offset-3">
             <div class=" card">
                 <div class="card-header bg-primary text-light text-center">
-                    <h4>@(editMode ? $"Editando Paciente: {Model.Name}" : "Creando Un Paciente")</h4>
+                    <h4>@(editMode ? $"Editando Doctor: {Model.Name}" : "Creando Un Doctor")</h4>
                 </div>
                 <div class="card-body">
 
@@ -28,7 +29,7 @@
                     }
 
 
-                    <form method="post" asp-controller="Patient" asp-action="@(editMode ? "Update":"Create")" enctype="multipart/form-data">
+                    <form method="post" asp-controller="Doctor" asp-action="@(editMode ? "Update":"Create")" enctype="multipart/form-data">
 
 
 
@@ -71,42 +72,20 @@
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="DateOfBorn" class="form-label">Fecha de Nacimiento: </label>
-                            <input type="date" step="any" asp-for="DateOfBorn" class="form-control" autocomplete="off" />
-                            <span asp-validation-for="DateOfBorn" class="text-danger"></span>
+                            <label asp-for="Email" class="form-label">Correo Electronico: </label>
+                            <input type="email" step="any" asp-for="Email" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
 
-                        <div class="mb-3">
-                            <label asp-for="Direction" class="form-label">Direccion: </label>
-                            <input type="text" step="any" asp-for="Direction" class="form-control" autocomplete="off" />
-                            <span asp-validation-for="Direction" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="IsAllegier" class="form-label">Eres Alergico?: </label>
-                            <select asp-for="IsAllegier" class="form-select">
-                                <option selected asp-for="IdProduction" value="true">Si</option>
-                                <option asp-for="IdProduction" value="false">No</option>
-                            </select>
-                            <span class="text-danger" asp-validation-for="IsSmoker"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="IsSmoker" class="form-label">Eres Fumador?: </label>
-                            <select asp-for="IsSmoker" class="form-select">
-                                <option selected asp-for="IdProduction" value="true">Si</option>
-                                <option asp-for="IdProduction" value="false">No</option>
-                            </select>
-                            <span class="text-danger" asp-validation-for="IsSmoker"></span>
-                        </div>
+                      
 
 
                         <input type="hidden" asp-for="Id" />
                         <input type="hidden" asp-for="ImageUrl" />
 
                         <button type="submit" class="btn btn-primary float-end ms-2">Guardar</button>
-                        <a asp-controller="Patient" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
+                        <a asp-controller="Doctor" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
 
                     </form>
                 </div>

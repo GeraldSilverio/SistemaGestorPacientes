@@ -1,5 +1,4 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
-using GestorDePacientes.Core.Application.Services;
 using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +32,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 }
                 SavePatientViewModel patientCreated = await _patientService.Add(vm);
 
-                if(patientCreated != null && patientCreated.Id !=0)
+                if (patientCreated != null && patientCreated.Id != 0)
                 {
                     patientCreated.ImageUrl = _patientService.UplpadFile(vm.File, patientCreated.Id);
                     await _patientService.Update(patientCreated, patientCreated.Id);
@@ -67,23 +66,25 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (patientCreated != null && patientCreated.Id != 0)
                 {
-                    vm.ImageUrl = _patientService.UplpadFile(vm.File, patientCreated.Id,true,patientCreated.ImageUrl);
+                    vm.ImageUrl = _patientService.UplpadFile(vm.File, patientCreated.Id, true, patientCreated.ImageUrl);
                     await _patientService.Update(vm, vm.Id);
                 }
                 return RedirectToRoute(new { controller = "Patient", action = "Index" });
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return View("Index", ex);
             }
         }
 
-        public async Task<IActionResult>Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
                 var patient = await _patientService.GetById(id);
                 return View("Delete", patient);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return View("Index", ex);
             }
@@ -104,9 +105,5 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             }
 
         }
-
-
-
-
     }
 }

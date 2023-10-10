@@ -15,6 +15,7 @@ namespace GestorDePacientes.Core.Application
             services.AddTransient<IRolServices, RolServices>();
             services.AddTransient<IUserServices, UserServices>();
             services.AddTransient<IPatientService, PatientService>();
+            services.AddTransient<IDoctorServices, DoctorService>();
             #endregion
         }
     }
