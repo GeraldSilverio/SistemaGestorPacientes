@@ -67,7 +67,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (patientCreated != null && patientCreated.Id != 0)
                 {
-                    patientCreated.ImageUrl = _patientService.UplpadFile(vm.File, patientCreated.Id,true,patientCreated.ImageUrl);
+                    vm.ImageUrl = _patientService.UplpadFile(vm.File, patientCreated.Id,true,patientCreated.ImageUrl);
                     await _patientService.Update(vm, vm.Id);
                 }
                 return RedirectToRoute(new { controller = "Patient", action = "Index" });
