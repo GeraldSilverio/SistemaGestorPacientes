@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using GestorDePacientes.Core.Application.Interfaces.Interfaces;
 using GestorDePacientes.Core.Application.Interfaces.Repositories;
 using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
-using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using GestorDePacientes.Core.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 

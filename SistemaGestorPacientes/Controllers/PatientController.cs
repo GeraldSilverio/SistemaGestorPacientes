@@ -43,5 +43,21 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             }
 
         }
+
+        public async Task<IActionResult> Update(int id)
+        {
+            var patient = await _patientService.GetById(id);
+            return View("Create", patient);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(SavePatientViewModel vm)
+        {
+
+        }
+
+
+
+
     }
 }
