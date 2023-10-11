@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels;
 using GestorDePacientes.Core.Application.ViewModels.DoctorViewModels;
 using GestorDePacientes.Core.Application.ViewModels.LabTestViewModels;
 using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
@@ -50,11 +51,11 @@ namespace GestorDePacientes.Core.Application.Mappings
                 .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
                 .ForMember(x => x.Creaty, opt => opt.Ignore())
                 .ForMember(x => x.CreatyBy, opt => opt.Ignore());
-                
+
 
 
             CreateMap<Patient, SavePatientViewModel>()
-                .ForMember(x=> x.File, opt => opt.Ignore())
+                .ForMember(x => x.File, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(x => x.LastModified, opt => opt.Ignore())
                 .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
@@ -83,7 +84,7 @@ namespace GestorDePacientes.Core.Application.Mappings
             #region LabTests
             CreateMap<LabTests, LabTestViewModel>()
                 .ReverseMap()
-                .ForMember(x => x.LastModified,opt => opt.Ignore())
+                .ForMember(x => x.LastModified, opt => opt.Ignore())
                 .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
                 .ForMember(x => x.Creaty, opt => opt.Ignore())
                 .ForMember(x => x.CreatyBy, opt => opt.Ignore());
@@ -96,6 +97,21 @@ namespace GestorDePacientes.Core.Application.Mappings
                .ForMember(x => x.CreatyBy, opt => opt.Ignore());
             #endregion
 
+            #region AppoinmetStatus
+            CreateMap<AppoinmentStatus, SaveAppoinmentViewModel>()
+                .ReverseMap()
+                .ForMember(x => x.LastModified, opt => opt.Ignore())
+               .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
+               .ForMember(x => x.Creaty, opt => opt.Ignore())
+               .ForMember(x => x.CreatyBy, opt => opt.Ignore());
+
+            CreateMap<AppoinmentStatus, AppoinmentStatusViewModel>()
+               .ReverseMap()
+               .ForMember(x => x.LastModified, opt => opt.Ignore())
+              .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
+              .ForMember(x => x.Creaty, opt => opt.Ignore())
+              .ForMember(x => x.CreatyBy, opt => opt.Ignore());
+            #endregion
         }
     }
 }

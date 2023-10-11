@@ -1,0 +1,31 @@
+﻿
+@using GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels;
+
+
+@model SaveAppoinmentViewModel
+
+@{
+    ViewData["title"] = "Delete";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3 mb-5">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <h3>Eliminando el Estado: @Model.Description</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <h3><strong>Estas seguro que deseas este estado?</strong></h3>
+                        <button class="btn btn-danger float-end ms-2" type="submit" asp-controller="Appoinment" asp-action="DeletePost" asp-route-id="@Model.Id">ELIMINAR</button>
+                        <a class="btn btn-warning float-end" asp-controller="Appoinment" asp-action="Index">Cancelar</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

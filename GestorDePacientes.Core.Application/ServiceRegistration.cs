@@ -17,6 +17,7 @@ namespace GestorDePacientes.Core.Application
             services.AddTransient<IPatientService, PatientService>();
             services.AddTransient<IDoctorServices, DoctorService>();
             services.AddTransient<ILabTestServices, LabTestServices>();
+            services.AddTransient<IAppoinmetStatusService, AppoinmentStatusService>();
             #endregion
         }
     }

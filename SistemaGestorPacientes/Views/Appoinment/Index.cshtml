@@ -1,0 +1,51 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels;
+
+@model List<AppoinmentStatusViewModel>
+
+@{
+    ViewData["Title"] = "Appoinment Home";
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3 text-end mt-2 mb-2">
+            <a class="btn btn-primary" asp-controller="Appoinment" asp-action="Create">CREAR ESTADO CITA</a>
+        </div>
+
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header text-light bg-primary">
+                    <h3 class="text-center">LISTADO DE ESTADOS DE CITAS CREADOS</h3>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Description</td>
+                                        <td>
+                                            <a class="btn btn-warning " asp-controller="Appoinment" asp-action="Update" asp-route-id="@item.Id">EDITAR</a>
+                                            <a class="btn btn-danger " asp-controller="Appoinment" asp-action="Delete" asp-route-id="@item.Id">ELIMINAR</a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
