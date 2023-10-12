@@ -13,7 +13,7 @@ namespace GestorDePacientes.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();

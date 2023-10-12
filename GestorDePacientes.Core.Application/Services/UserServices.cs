@@ -14,9 +14,11 @@ namespace GestorDePacientes.Core.Application.Services
     public class UserServices : GenericService<SaveUserViewModel, UserViewModel, User>, IUserServices
     {
         private readonly IUserRepository _userRepository;
-        public UserServices(IMapper mapper, IUserRepository userRepository) : base(mapper,userRepository)
+        private readonly IMapper _mapper;
+        public UserServices(IMapper mapper, IUserRepository userRepository) : base(mapper, userRepository)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
         public async Task<List<UserViewModel>> GetAllViewModelWithInclude()
         {
@@ -34,9 +36,30 @@ namespace GestorDePacientes.Core.Application.Services
             }).ToList();
         }
 
+        public async Task<UserViewModel> LoginAsync(LoginViewModel loginView)
+        {
+            User user = await _userRepository.LoginAsync(loginView);
+
+            if (user == null)
+            {
+                return null;
+            }
+            UserViewModel userView = new()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                LastName = user.LastName,
+                IdRol = user.Rol.Id,
+                RolName = user.Rol.Name,
+                Email = user.Email,
+                UserName = user.UserName,
+            };
+            return userView;
+        }
+
         public bool ValidateUserName(string userName)
         {
-           return  _userRepository.ValidateUserName(userName);
+            return _userRepository.ValidateUserName(userName);
         }
     }
 }

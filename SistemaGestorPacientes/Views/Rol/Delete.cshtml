@@ -1,0 +1,30 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.RolViewModels;
+
+
+@model SaveRolViewModel
+
+@{
+    ViewData["title"] = "Delete";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3 mb-5">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <h3>Eliminando el Rol: @Model.Name</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <h3><strong>Estas seguro que deseas este rol?</strong></h3>
+                        <button class="btn btn-danger float-end ms-2" type="submit" asp-controller="Rol" asp-action="DeletePost" asp-route-id="@Model.Id">ELIMINAR</button>
+                        <a class="btn btn-warning float-end" asp-controller="Rol" asp-action="Index">Cancelar</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

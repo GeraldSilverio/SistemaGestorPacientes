@@ -41,6 +41,13 @@ namespace GestorDePacientes.Core.Application.Mappings
                 .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
                 .ForMember(x => x.Creaty, opt => opt.Ignore())
                 .ForMember(x => x.CreatyBy, opt => opt.Ignore());
+
+            CreateMap<Rol, SaveRolViewModel>()
+               .ReverseMap()
+               .ForMember(x => x.LastModified, opt => opt.Ignore())
+               .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
+               .ForMember(x => x.Creaty, opt => opt.Ignore())
+               .ForMember(x => x.CreatyBy, opt => opt.Ignore());
             #endregion
 
             #region Patients

@@ -7,6 +7,8 @@ namespace GestorDePacientes.Core.Application.Interfaces.Services
     {
         Task<List<UserViewModel>> GetAllViewModelWithInclude();
         bool ValidateUserName(string userName);
+        Task<UserViewModel> LoginAsync(LoginViewModel loginView);
+
 
 
     }
