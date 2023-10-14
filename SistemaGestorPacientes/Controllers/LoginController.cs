@@ -49,5 +49,11 @@ namespace SistemaGestorPacientes.Controllers
                 return View(ex.Message);
             }
         }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("user");
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
+        }
     }
 }

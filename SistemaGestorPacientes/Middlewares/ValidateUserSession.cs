@@ -19,7 +19,7 @@ namespace WebApp.SistemaGestorPacientes.Middlewares
             UserViewModel userViewModel = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
 
 
-            if (userViewModel == null || userViewModel.RolName != "Asistente")
+            if (userViewModel == null || userViewModel.RolName != "ASISTENTE")
             {
                 return false;
             }
@@ -29,7 +29,7 @@ namespace WebApp.SistemaGestorPacientes.Middlewares
         {
             UserViewModel userViewModel = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
 
-            if (userViewModel == null || userViewModel.RolName != "Administrador")
+            if (userViewModel == null || userViewModel.RolName != "ADMINISTRADOR")
             {
                 return false;
             }

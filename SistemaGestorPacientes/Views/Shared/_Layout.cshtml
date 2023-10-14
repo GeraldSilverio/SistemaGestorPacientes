@@ -29,7 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User != null && User.RolName == "Administrador")
+                        @if (User != null && User.RolName == "ADMINISTRADOR")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Index">Usuarios</a>
@@ -45,12 +45,17 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Appoinment" asp-action="Index">Estados Citas</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Rol" asp-action="Index">Roles</a>
                             </li>
 
+                            <li class="nav-item align-content-end">
+                                <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Login" asp-action="LogOut">Cerrar session</a>
+                            </li>
+
                         }
-                        @if (User != null && User.RolName == "Asistente")
+                        @if (User != null && User.RolName == "ASISTENTE")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Patient" asp-action="Index">Pacientes</a>
@@ -61,6 +66,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Index">Citas</a>
+                            </li>
+
+                            <li class="nav-item align-content-end">
+                                <a class="nav-link text-white fw-bold" asp-area="" asp-controller="Login" asp-action="LogOut">Cerrar session</a>
                             </li>
                         }
                     </ul>

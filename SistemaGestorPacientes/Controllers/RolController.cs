@@ -56,6 +56,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return View("Create", vm);
                 }
+                vm.Name = vm.Name.ToUpper();
                 await _rolServices.Add(vm);
                 return RedirectToRoute(new { controller = "Rol", action = "Index" });
             }
@@ -93,6 +94,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return View("Create", vm);
                 }
+                vm.Name = vm.Name.ToUpper();
                 await _rolServices.Update(vm, vm.Id);
                 return RedirectToRoute(new { controller = "Rol", action = "Index" });
             }

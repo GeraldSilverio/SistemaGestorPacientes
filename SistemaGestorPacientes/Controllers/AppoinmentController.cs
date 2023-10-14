@@ -55,6 +55,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return View("Create", vm);
                 }
+                vm.Description = vm.Description.ToUpper();
                 await _appoinmetStatusService.Add(vm);
                 return RedirectToRoute(new { controller = "Appoinment", action = "Index" });
             }
@@ -94,6 +95,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return View("Create", vm);
                 }
+                vm.Description = vm.Description.ToUpper();
                 await _appoinmetStatusService.Update(vm, vm.Id);
                 return RedirectToRoute(new { controller = "Appoinment", action = "Index" });
             }
