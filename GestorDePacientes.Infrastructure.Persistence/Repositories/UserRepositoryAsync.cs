@@ -35,7 +35,7 @@ namespace GestorDePacientes.Infrastructure.Persistence.Repositories
 
         public async Task<User> LoginAsync(LoginViewModel loginView)
         {
-            string passwordEncrypy = PassWordEncryption.ComputeSha256Hash(loginView.PassWord);
+            string passwordEncrypy = PassWordEncryption.ComputeSha256Hash(loginView.Password);
 
             var users = await GetAllWithIncludeAsync(new List<string> { "Rol" });
             User user = users.FirstOrDefault(user => user.UserName ==loginView.UserName && user.Password == passwordEncrypy) ;

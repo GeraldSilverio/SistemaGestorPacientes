@@ -3,6 +3,7 @@ using GestorDePacientes.Core.Application.Services;
 using GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels;
 using GestorDePacientes.Core.Application.ViewModels.RolViewModels;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.SistemaGestorPacientes.Middlewares;
 
 namespace WebApp.SistemaGestorPacientes.Controllers
 {
@@ -10,15 +11,21 @@ namespace WebApp.SistemaGestorPacientes.Controllers
     {
 
         private readonly IRolServices _rolServices;
-        public RolController(IRolServices rolServices)
+        private readonly ValidateUserSession _validateUserSession;
+        public RolController(IRolServices rolServices, ValidateUserSession validateUserSession)
         {
             _rolServices = rolServices;
+            _validateUserSession = validateUserSession;
         }
 
         public async Task<IActionResult> Index()
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 var roles = await _rolServices.GetAll();
                 return View(roles);
             }
@@ -30,6 +37,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         }
         public IActionResult Create()
         {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View(new SaveRolViewModel());
         }
         [HttpPost]
@@ -37,6 +48,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     return View("Create", vm);
@@ -53,6 +68,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 var rol = await _rolServices.GetById(id);
                 return View("Create", rol);
             }
@@ -66,6 +85,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     return View("Create", vm);
@@ -84,6 +107,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 var rol = await _rolServices.GetById(id);
                 return View("Delete", rol);
 
@@ -98,6 +125,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 await _rolServices.Delete(id);
                 return RedirectToRoute(new { controller = "Rol", action = "Index" });
             }

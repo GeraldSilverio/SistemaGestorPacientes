@@ -1,24 +1,35 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.SistemaGestorPacientes.Middlewares;
 
 namespace WebApp.SistemaGestorPacientes.Controllers
 {
     public class PatientController : Controller
     {
         private readonly IPatientService _patientService;
+        private readonly ValidateUserSession _validateUserSession;
 
-        public PatientController(IPatientService patientService)
+        public PatientController(IPatientService patientService, ValidateUserSession validateUserSession)
         {
             _patientService = patientService;
+            _validateUserSession = validateUserSession;
         }
 
         public async Task<IActionResult> Index()
         {
+            if (!_validateUserSession.HasAsis())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View(await _patientService.GetAll());
         }
         public IActionResult Create()
         {
+            if (!_validateUserSession.HasAsis())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View(new SavePatientViewModel());
         }
         [HttpPost]
@@ -26,6 +37,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAsis())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     return View("Create", vm);
@@ -49,6 +64,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
+            if (!_validateUserSession.HasAsis())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             var patient = await _patientService.GetById(id);
             return View("Create", patient);
         }
@@ -58,6 +77,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAsis())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     return View("Create", vm);
@@ -81,6 +104,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAsis())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 var patient = await _patientService.GetById(id);
                 return View("Delete", patient);
             }
@@ -95,6 +122,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAsis())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 await _patientService.Delete(id);
                 return RedirectToRoute(new { controller = "Patient", action = "Index" });
 

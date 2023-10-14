@@ -30,11 +30,11 @@ namespace SistemaGestorPacientes.Controllers
                 {
                     return View("Index", vm);
                 }
-                var user = await _userServices.LoginAsync(vm);
+                UserViewModel user = await _userServices.LoginAsync(vm);
 
                 if (user != null)
                 {
-                    HttpContext.Session.Set<LoginViewModel>("user", vm);
+                    HttpContext.Session.Set<UserViewModel>("user", user);
                     return RedirectToRoute(new { controller = "User", action = "Index" });
                 }
                 else

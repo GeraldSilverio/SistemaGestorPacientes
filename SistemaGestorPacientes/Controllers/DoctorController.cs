@@ -1,6 +1,7 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.DoctorViewModels;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.SistemaGestorPacientes.Middlewares;
 
 namespace WebApp.SistemaGestorPacientes.Controllers
 {
@@ -8,20 +9,30 @@ namespace WebApp.SistemaGestorPacientes.Controllers
     public class DoctorController : Controller
     {
         private readonly IDoctorServices _doctorServices;
+        private readonly ValidateUserSession _validateUserSession;
 
-        public DoctorController(IDoctorServices doctorServices)
+        public DoctorController(IDoctorServices doctorServices, ValidateUserSession validateUserSession)
         {
             _doctorServices = doctorServices;
+            _validateUserSession = validateUserSession;
         }
 
         public async Task<IActionResult> Index()
         {
-            var doctors = await _doctorServices.GetAll();
-            return View(doctors);
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+
+            return View(await _doctorServices.GetAll());
         }
 
         public IActionResult Create()
         {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View(new SaveDoctorViewModel());
         }
         [HttpPost]
@@ -29,10 +40,15 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     return View("Create", vm);
                 }
+
                 SaveDoctorViewModel doctorCreated = await _doctorServices.Add(vm);
 
                 if (doctorCreated.Id != 0 && doctorCreated != null)
@@ -54,6 +70,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 var doctor = await _doctorServices.GetById(id);
                 return View("Create", doctor);
             }
@@ -69,11 +89,17 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
+
                 if (!ModelState.IsValid)
                 {
                     return View("Create", vm);
 
                 }
+
 
                 SaveDoctorViewModel doctorCreated = await _doctorServices.GetById(vm.Id);
                 if (doctorCreated != null && doctorCreated.Id != 0)
@@ -93,6 +119,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 var doctor = await _doctorServices.GetById(id);
                 return View("Delete", doctor);
 
@@ -108,6 +138,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 await _doctorServices.Delete(id);
                 return RedirectToRoute(new { controller = "Doctor", action = "Index" });
             }

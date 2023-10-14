@@ -1,5 +1,6 @@
 using GestorDePacientes.Infrastructure.Persistence;
 using GestorDePacientes.Core.Application;
+using WebApp.SistemaGestorPacientes.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 builder.Services.AddApplicationLayer();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<ValidateUserSession, ValidateUserSession>();
 
 
 var app = builder.Build();

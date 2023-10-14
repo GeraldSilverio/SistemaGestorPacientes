@@ -1,6 +1,7 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.SistemaGestorPacientes.Middlewares;
 
 namespace WebApp.SistemaGestorPacientes.Controllers
 {
@@ -8,26 +9,40 @@ namespace WebApp.SistemaGestorPacientes.Controllers
     {
         private readonly IRolServices _rolServices;
         private readonly IUserServices _userServices;
+        private readonly ValidateUserSession _validateUserSession;
 
-        public UserController(IRolServices rolServices, IUserServices userServices)
+        public UserController(IRolServices rolServices, IUserServices userServices, ValidateUserSession validateUserSession)
         {
             _rolServices = rolServices;
             _userServices = userServices;
+            _validateUserSession = validateUserSession;
         }
 
         public async Task<IActionResult> Index()
         {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             return View(await _userServices.GetAllViewModelWithInclude());
         }
 
         public async Task<IActionResult> Create()
         {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             ViewBag.Rols = await _rolServices.GetAll();
             return View(new SaveUserViewModel());
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             ViewBag.Rols = await _rolServices.GetAll();
             var entity = await _userServices.GetById(id);
             return View("Create", entity);
@@ -35,6 +50,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
             var entity = await _userServices.GetById(id);
             return View("Delete", entity);
         }
@@ -44,6 +63,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     ViewBag.Rols = await _rolServices.GetAll();
@@ -66,6 +89,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 await _userServices.Delete(id);
                 return RedirectToRoute(new { controller = "User", action = "Index" });
 
@@ -82,6 +109,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     var userExisted = await _userServices.GetById(vm.Id);

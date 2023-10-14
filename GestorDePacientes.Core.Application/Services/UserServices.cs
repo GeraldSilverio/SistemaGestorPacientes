@@ -3,11 +3,6 @@ using GestorDePacientes.Core.Application.Interfaces.Repositories;
 using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using GestorDePacientes.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestorDePacientes.Core.Application.Services
 {
@@ -44,7 +39,7 @@ namespace GestorDePacientes.Core.Application.Services
             {
                 return null;
             }
-            UserViewModel userView = new()
+            UserViewModel userVw = new()
             {
                 Id = user.Id,
                 Name = user.Name,
@@ -54,7 +49,7 @@ namespace GestorDePacientes.Core.Application.Services
                 Email = user.Email,
                 UserName = user.UserName,
             };
-            return userView;
+            return userVw;
         }
 
         public bool ValidateUserName(string userName)

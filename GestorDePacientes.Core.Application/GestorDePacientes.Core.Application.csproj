@@ -23,4 +23,9 @@
     <ProjectReference Include="..\GestorDePacientes.Core.Domain\GestorDePacientes.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Facades\" />
+    <Folder Include="Interfaces\Facades\" />
+  </ItemGroup>
+
 </Project>

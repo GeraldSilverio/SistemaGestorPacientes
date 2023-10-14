@@ -86,8 +86,8 @@
                         <div class="mb-3">
                             <label asp-for="IsAllegier" class="form-label">Eres Alergico?: </label>
                             <select asp-for="IsAllegier" class="form-select">
-                                <option selected asp-for="IdProduction" value="true">Si</option>
-                                <option asp-for="IdProduction" value="false">No</option>
+                                <option selected value="true">Si</option>
+                                <option  value="false">No</option>
                             </select>
                             <span class="text-danger" asp-validation-for="IsSmoker"></span>
                         </div>
@@ -95,8 +95,8 @@
                         <div class="mb-3">
                             <label asp-for="IsSmoker" class="form-label">Eres Fumador?: </label>
                             <select asp-for="IsSmoker" class="form-select">
-                                <option selected asp-for="IdProduction" value="true">Si</option>
-                                <option asp-for="IdProduction" value="false">No</option>
+                                <option selected  value="true">Si</option>
+                                <option  value="false">No</option>
                             </select>
                             <span class="text-danger" asp-validation-for="IsSmoker"></span>
                         </div>
