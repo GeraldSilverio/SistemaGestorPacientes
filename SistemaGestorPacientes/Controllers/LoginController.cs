@@ -1,8 +1,8 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using Microsoft.AspNetCore.Mvc;
-using SistemaGestorPacientes.Models;
-using System.Diagnostics;
+using GestorDePacientes.Core.Application.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace SistemaGestorPacientes.Controllers
 {
@@ -34,6 +34,7 @@ namespace SistemaGestorPacientes.Controllers
 
                 if (user != null)
                 {
+                    HttpContext.Session.Set<LoginViewModel>("user", vm);
                     return RedirectToRoute(new { controller = "User", action = "Index" });
                 }
                 else
