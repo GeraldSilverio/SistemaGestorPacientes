@@ -3,12 +3,6 @@ using GestorDePacientes.Core.Application.Interfaces.Repositories;
 using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using GestorDePacientes.Core.Domain.Entities;
 using GestorDePacientes.Infrastructure.Persistence.Context;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestorDePacientes.Infrastructure.Persistence.Repositories
 {

@@ -2,15 +2,11 @@
 using GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels;
 using GestorDePacientes.Core.Application.ViewModels.DoctorViewModels;
 using GestorDePacientes.Core.Application.ViewModels.LabTestViewModels;
+using GestorDePacientes.Core.Application.ViewModels.MedicalViewModels;
 using GestorDePacientes.Core.Application.ViewModels.PatientViewModels;
 using GestorDePacientes.Core.Application.ViewModels.RolViewModels;
 using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using GestorDePacientes.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestorDePacientes.Core.Application.Mappings
 {
@@ -118,6 +114,29 @@ namespace GestorDePacientes.Core.Application.Mappings
               .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
               .ForMember(x => x.Creaty, opt => opt.Ignore())
               .ForMember(x => x.CreatyBy, opt => opt.Ignore());
+            #endregion
+
+            #region MedicalAppoinmets
+            CreateMap<MedicalAppointment, MedicalViewModel>()
+                .ForMember(x => x.PatientName, opt => opt.Ignore())
+                .ForMember(x => x.DoctortName, opt => opt.Ignore())
+                .ForMember(x => x.StatustName, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(x => x.LastModified, opt => opt.Ignore())
+               .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
+               .ForMember(x => x.Creaty, opt => opt.Ignore())
+               .ForMember(x => x.CreatyBy, opt => opt.Ignore());
+
+
+
+
+            CreateMap<MedicalAppointment, SaveMedicalViewModel>()
+                .ReverseMap()
+                .ForMember(x => x.LastModified, opt => opt.Ignore())
+                .ForMember(x => x.LastModifiedBy, opt => opt.Ignore())
+                .ForMember(x => x.Creaty, opt => opt.Ignore())
+                .ForMember(x => x.CreatyBy, opt => opt.Ignore());
+
             #endregion
         }
     }

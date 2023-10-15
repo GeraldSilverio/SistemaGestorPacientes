@@ -1,5 +1,4 @@
 ﻿using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
-using Microsoft.AspNetCore.Http;
 using GestorDePacientes.Core.Application.Helpers;
 
 namespace WebApp.SistemaGestorPacientes.Middlewares

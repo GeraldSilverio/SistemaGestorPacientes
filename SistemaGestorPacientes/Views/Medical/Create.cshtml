@@ -1,0 +1,81 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.MedicalViewModels;
+
+
+
+@model SaveMedicalViewModel
+
+@{
+    ViewData["Title"] = "Create Medical Appoinment";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class=" card">
+                <div class="card-header bg-primary text-light text-center">
+                    <h4>Nueva Cita</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Medical" asp-action="Create">
+
+                        <div class="mb-3">
+                            <label asp-for="IdPatient" class="form-label">Seleccione al Paciente: </label>
+                            <select asp-for="IdPatient" class="form-select">
+                                <option selected>Seleccione al Paciente</option>
+                                @foreach (var patient in ViewBag.Patients)
+                                {
+                                    <option asp-for="IdProduction" value="@patient.Id">@patient.Name</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="IdPatient"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdDoctor" class="form-label">Seleccione al Doctor: </label>
+                            <select asp-for="IdDoctor" class="form-select">
+                                <option selected>Seleccione al Doctor</option>
+                                @foreach (var doctor in ViewBag.Doctors)
+                                {
+                                    <option asp-for="IdProduction" value="@doctor.Id">@doctor.Name</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="IdDoctor"></span>
+                        </div>
+                       
+
+                        <div class="mb-3">
+                            <label asp-for="DateOfAppoinment" class="form-label">Fecha de la Cita: </label>
+                            <input type="date" step="any" asp-for="DateOfAppoinment" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="DateOfAppoinment" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="HourOfAppoinment" class="form-label">Hora de la Cita: </label>
+                            <input type="time" step="any" asp-for="HourOfAppoinment" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="HourOfAppoinment" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ReasonOfAppoinment" class="form-label">Razon de la Cita: </label>
+                            <input type="text" step="any" asp-for="ReasonOfAppoinment" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="ReasonOfAppoinment" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary float-end ms-2">Crear</button>
+                        <a asp-controller="Medical" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
+
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

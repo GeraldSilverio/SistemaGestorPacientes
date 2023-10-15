@@ -2,11 +2,6 @@
 using GestorDePacientes.Core.Domain.Entities;
 using GestorDePacientes.Infrastructure.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestorDePacientes.Infrastructure.Persistence.Context
 {

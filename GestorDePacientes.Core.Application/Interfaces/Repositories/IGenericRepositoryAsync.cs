@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestorDePacientes.Core.Application.Interfaces.Repositories
+﻿namespace GestorDePacientes.Core.Application.Interfaces.Repositories
 {
     public interface IGenericRepositoryAsync<TEntity> where TEntity : class
     {

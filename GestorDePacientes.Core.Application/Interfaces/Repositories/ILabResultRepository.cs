@@ -2,7 +2,7 @@
 
 namespace GestorDePacientes.Core.Application.Interfaces.Repositories
 {
-    public interface IPatientReposity : IGenericRepositoryAsync<Patient>
+    public interface ILabResultRepository :IGenericRepositoryAsync<PatientLabTests>
     {
     }
 }

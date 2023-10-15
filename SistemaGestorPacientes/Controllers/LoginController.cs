@@ -35,7 +35,7 @@ namespace SistemaGestorPacientes.Controllers
                 if (user != null)
                 {
                     HttpContext.Session.Set<UserViewModel>("user", user);
-                    return RedirectToRoute(new { controller = "User", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 else
                 {

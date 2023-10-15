@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels
+﻿namespace GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels
 {
     public class AppoinmentStatusViewModel
     {

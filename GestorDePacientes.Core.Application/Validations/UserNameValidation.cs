@@ -1,11 +1,5 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
-using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestorDePacientes.Core.Application.Validations
 {

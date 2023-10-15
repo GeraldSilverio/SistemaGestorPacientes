@@ -1,6 +1,4 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
-using GestorDePacientes.Core.Application.Services;
-using GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels;
 using GestorDePacientes.Core.Application.ViewModels.RolViewModels;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.SistemaGestorPacientes.Middlewares;
