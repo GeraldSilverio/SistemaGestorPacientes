@@ -16,7 +16,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             _validateUserSession = validateUserSession;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(FilterLabResultViewModel filter)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
                 }
-                return View(await _labResultServices.GetAllViewModelWithInclude());
+                return View(await _labResultServices.GetByFiltersAsync(filter));
             }
             catch (Exception ex)
             {

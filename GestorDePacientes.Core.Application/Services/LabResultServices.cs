@@ -2,7 +2,6 @@
 using GestorDePacientes.Core.Application.Interfaces.Repositories;
 using GestorDePacientes.Core.Application.Interfaces.Services;
 using GestorDePacientes.Core.Application.ViewModels.LabResultViewModels;
-using GestorDePacientes.Core.Application.ViewModels.MedicalViewModels;
 using GestorDePacientes.Core.Domain.Entities;
 
 namespace GestorDePacientes.Core.Application.Services
@@ -36,11 +35,11 @@ namespace GestorDePacientes.Core.Application.Services
             return viewModel;
         }
 
-        public async Task<List<LabResultViewModel>> GetAllViewModelWithInclude()
+        public async Task<List<LabResultViewModel>> GetByFiltersAsync(FilterLabResultViewModel filter)
         {
             var labResults = await _labResultRepository.GetAllWithIncludeAsync(new List<string> { "Patient", "LabTests" });
 
-            var result =  labResults.Select(labResult => new LabResultViewModel
+            var result = labResults.Select(labResult => new LabResultViewModel
             {
                 Id = labResult.Id,
                 PatientName = labResult.Patient.Name + " " + labResult.Patient.LastName,
@@ -48,6 +47,12 @@ namespace GestorDePacientes.Core.Application.Services
                 LabTestName = labResult.LabTests.Name,
                 IsCompleted = labResult.IsCompleted,
             }).Where(x => x.IsCompleted != true).ToList();
+            
+
+            if (filter.Identification != null)
+            {
+                result = result.Where(s => s.PatientIdentification.ToLower() == filter.Identification.ToLower()).ToList();
+            }
 
             return result;
         }

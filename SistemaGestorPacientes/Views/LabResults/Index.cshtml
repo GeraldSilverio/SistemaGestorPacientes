@@ -9,10 +9,19 @@
 <div class="container-fluid">
 
     <div class="row">
+        <form class="row g-3" asp-controller="LabResults" asp-action="Index">
+            <div class="col-auto">
+                <input type="text" class="form-control" id="Identification" name="Identification"
+                       placeholder="Filtrar por Cedula">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Filtrar por Cedula</button>
+            </div>
+        </form>
         <div class="col-12">
             <div class="card">
                 <div class="card-header text-light bg-primary">
-                    <h3 class="text-center">LISTADO DE PACIENTES CREADOS</h3>
+                    <h3 class="text-center">LISTADO DE RESULTADOS DE LABORATORIOS</h3>
                 </div>
                 <div class="card-body">
                     <div>
