@@ -8,6 +8,6 @@ public class PatientLabTests : AuditableBaseEntity
     public Patient Patient { get; set; } = null!;
     public int IdLabTests { get; set; }
     public LabTests LabTests { get; set; } = null!;
-    public string Comments { get; set; } = null!;
+    public string? Comments { get; set; } 
     public bool IsCompleted { get; set; }
 }

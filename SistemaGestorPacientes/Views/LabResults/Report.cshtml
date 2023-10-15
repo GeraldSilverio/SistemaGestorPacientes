@@ -1,0 +1,36 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.LabResultViewModels;
+
+@model SaveLabResultViewModel
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class=" card">
+                <div class="card-header bg-primary text-light text-center">
+                    <h4>REPORTANDO RESULTADOS</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="LabResults" asp-action="Report">
+
+
+                        <div class="mb-3">
+                            <label asp-for="Comments" class="form-label">Comentarios de la prueba: </label>
+                            <input type="text" asp-for="Comments" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Comments" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="IdPatient" />
+                        <input type="hidden" asp-for="IdLabTests"/>
+
+                        <button type="submit" class="btn btn-primary float-end ms-2">REPORTAR</button>
+                        <a asp-controller="LabResults" asp-action="Index" class="btn btn-warning float-end ">Volver atras</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

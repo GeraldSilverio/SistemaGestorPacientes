@@ -1,4 +1,5 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
+using GestorDePacientes.Core.Application.ViewModels.LabResultViewModels;
 using GestorDePacientes.Core.Application.ViewModels.MedicalViewModels;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.SistemaGestorPacientes.Middlewares;
@@ -11,15 +12,19 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         private readonly IAppoinmetStatusService _appoinmetStatusService;
         private readonly IPatientService _patientService;
         private readonly IDoctorServices _doctorServices;
+        private readonly ILabTestServices _labTestServices;
+        private readonly ILabResultServices _labResultServices;
         private readonly ValidateUserSession _validateUserSession;
 
-        public MedicalController(IMedicalAppoinmentService medicalService, IPatientService patientService, IDoctorServices doctorServices, ValidateUserSession validateUserSession, IAppoinmetStatusService appoinmetStatusService)
+        public MedicalController(IMedicalAppoinmentService medicalService, IPatientService patientService, IDoctorServices doctorServices, ValidateUserSession validateUserSession, IAppoinmetStatusService appoinmetStatusService, ILabTestServices labTestServices, ILabResultServices labResultServices)
         {
             _medicalService = medicalService;
             _patientService = patientService;
             _doctorServices = doctorServices;
             _validateUserSession = validateUserSession;
             _appoinmetStatusService = appoinmetStatusService;
+            _labTestServices = labTestServices;
+            _labResultServices = labResultServices;
         }
 
         public async Task<IActionResult> Index()
@@ -108,6 +113,44 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 }
                 await _medicalService.Delete(id);
                 return RedirectToRoute(new {controller ="Medical",action = "Index"});
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        public async Task<IActionResult> Consultar(int id)
+        {
+            try
+            {
+                if (!_validateUserSession.HasAsis())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
+                ViewBag.LabTest = await _labTestServices.GetAll();
+                var labResult = new SaveLabResultViewModel();
+                labResult.IdPatient = id;
+                return View("Consultar", labResult);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Consultar(SaveLabResultViewModel vm)
+        {
+            try
+            {
+                if (!_validateUserSession.HasAsis())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
+                vm.Id = 0;
+                await _labResultServices.Add(vm);
+
+                return RedirectToRoute(new { controller = "Medical", action = "Index" });
             }
             catch (Exception ex)
             {

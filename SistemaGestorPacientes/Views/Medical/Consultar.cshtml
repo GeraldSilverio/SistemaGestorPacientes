@@ -1,0 +1,48 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.LabResultViewModels;
+
+
+@model SaveLabResultViewModel
+
+@{
+    ViewData["Title"] = "Create Medical Appoinment";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class=" card">
+                <div class="card-header bg-primary text-light text-center">
+                    <h4>PRUEBAS PARA EL PACIENTE</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Medical" asp-action="Consultar">
+                        @foreach (var item in ViewBag.LabTest)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input"
+                                       type="checkbox"
+                                       value="@item.Id"
+                                       name="IdLabTest"
+                                       id="IdLabTest">
+                                <label class="col-form-label" for="IdLabTest">
+                                    @item.Name
+                                </label>
+                            </div>
+                        }
+                        <input type="hidden" asp-for="IdPatient" />
+                        <button type="submit" class="btn btn-primary float-end ms-2">Crear</button>
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
