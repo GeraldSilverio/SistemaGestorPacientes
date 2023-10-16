@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int IdPatient { get; set; }
+        public int IdMedicalAppoinment { get; set; }
         public string? PatientName { get; set; }
         public string? PatientIdentification { get; set; }
         public int IdLabTest { get; set; }

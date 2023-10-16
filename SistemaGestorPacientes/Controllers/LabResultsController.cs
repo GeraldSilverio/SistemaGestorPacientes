@@ -40,6 +40,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
                 }
+               
                 var labResultCreated = await _labResultServices.GetById(id);
                 return View(labResultCreated);
             }
@@ -58,8 +59,14 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
                 }
-                vm.IsCompleted = true;
-                await _labResultServices.Update(vm, vm.Id);
+
+                //Reportando resultados.
+                var LabResultCreated = await _labResultServices.GetById(vm.Id);
+                LabResultCreated.IsCompleted= true;
+                LabResultCreated.Comments = vm.Comments;
+
+
+                await _labResultServices.Update(LabResultCreated, LabResultCreated.Id);
                 return RedirectToRoute(new { controller = "LabResults", action = "Index" });
             }
             catch (Exception ex)

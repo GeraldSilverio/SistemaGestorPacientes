@@ -102,7 +102,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 return View(ex.Message);
             }
         }
-        
+
         public async Task<IActionResult> DeletePost(int id)
         {
             try
@@ -112,7 +112,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
                 }
                 await _medicalService.Delete(id);
-                return RedirectToRoute(new {controller ="Medical",action = "Index"});
+                return RedirectToRoute(new { controller = "Medical", action = "Index" });
             }
             catch (Exception ex)
             {
@@ -128,9 +128,15 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
                 }
+
+                //Pruebas de laboratorio disponibles
                 ViewBag.LabTest = await _labTestServices.GetAll();
+
+                //Creo un modelo de LabResult con el id de la cita
                 var labResult = new SaveLabResultViewModel();
-                labResult.IdPatient = id;
+                labResult.IdMedicalAppoinment = id;
+
+                //Retorno el modelo
                 return View("Consultar", labResult);
             }
             catch (Exception ex)
@@ -150,6 +156,13 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 vm.Id = 0;
                 await _labResultServices.Add(vm);
 
+                //Obtengo la Cita creada.
+                var medicalCreated = await _medicalService.GetById(vm.IdMedicalAppoinment);
+
+                //Cambiando el estado a Pendiente de Resultados.
+                medicalCreated.IdAppoinmentStatus = await _appoinmetStatusService.GetAppoinmetIdbyName("PENDIENTE DE RESULTADOS");
+                await _medicalService.Update(medicalCreated, medicalCreated.Id);
+               
                 return RedirectToRoute(new { controller = "Medical", action = "Index" });
             }
             catch (Exception ex)

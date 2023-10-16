@@ -8,20 +8,26 @@ namespace GestorDePacientes.Core.Application.Services
 {
     public class LabResultServices : GenericService<SaveLabResultViewModel, LabResultViewModel, PatientLabTests>,ILabResultServices
     {
-        public ILabResultRepository _labResultRepository { get; set; }
-        public LabResultServices(IMapper mapper, ILabResultRepository labResultRepository) : base(mapper, labResultRepository)
+        public readonly ILabResultRepository _labResultRepository;
+        public readonly IMedicalAppoinmentService _medicalService;
+        public LabResultServices(IMapper mapper, ILabResultRepository labResultRepository, IMedicalAppoinmentService medicalService) : base(mapper, labResultRepository)
         {
             _labResultRepository = labResultRepository;
+            _medicalService = medicalService;
         }
 
         public override async Task<SaveLabResultViewModel> Add(SaveLabResultViewModel viewModel)
         {
+            //Busco la cita creada para tener el Id del paciente de esa cita.
+            var medicalCreated = await _medicalService.GetById(viewModel.IdMedicalAppoinment);
+
             var labResult = new List<PatientLabTests>();
             foreach (var idLab in viewModel.IdLabTest) 
             {
                 var lab = new PatientLabTests()
                 {
-                    IdPatient = viewModel.IdPatient,
+                    IdMedicalAppoinment = viewModel.IdMedicalAppoinment,
+                    IdPatient = medicalCreated.IdPatient,
                     IdLabTests = idLab,
                     IsCompleted = false,
                 };
@@ -37,7 +43,7 @@ namespace GestorDePacientes.Core.Application.Services
 
         public async Task<List<LabResultViewModel>> GetByFiltersAsync(FilterLabResultViewModel filter)
         {
-            var labResults = await _labResultRepository.GetAllWithIncludeAsync(new List<string> { "Patient", "LabTests" });
+            var labResults = await _labResultRepository.GetAllWithIncludeAsync(new List<string> { "Patient", "LabTests", "MedicalAppointment" });
 
             var result = labResults.Select(labResult => new LabResultViewModel
             {
@@ -46,6 +52,8 @@ namespace GestorDePacientes.Core.Application.Services
                 PatientIdentification = labResult.Patient.Identification,
                 LabTestName = labResult.LabTests.Name,
                 IsCompleted = labResult.IsCompleted,
+                IdMedicalAppoinment = labResult.MedicalAppointment.Id
+                
             }).Where(x => x.IsCompleted != true).ToList();
             
 
