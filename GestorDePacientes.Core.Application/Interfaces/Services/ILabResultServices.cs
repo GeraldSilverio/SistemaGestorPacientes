@@ -6,5 +6,6 @@ namespace GestorDePacientes.Core.Application.Interfaces.Services
     public interface ILabResultServices:IGenericService<SaveLabResultViewModel,LabResultViewModel,PatientLabTests>
     {
         Task<List<LabResultViewModel>> GetByFiltersAsync(FilterLabResultViewModel filter);
+        Task DeleteByIdAppoinment(int id);
     }
 }

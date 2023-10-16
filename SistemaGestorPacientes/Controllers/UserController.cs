@@ -20,19 +20,19 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (!_validateUserSession.HasAdmin())
+            /*if (!_validateUserSession.HasAdmin())
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }
+            }*/
             return View(await _userServices.GetAllViewModelWithInclude());
         }
 
         public async Task<IActionResult> Create()
         {
-            if (!_validateUserSession.HasAdmin())
+            /*if (!_validateUserSession.HasAdmin())
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }
+            }*/
             ViewBag.Rols = await _rolServices.GetAll();
             return View(new SaveUserViewModel());
         }
@@ -63,10 +63,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
-                if (!_validateUserSession.HasAdmin())
-                {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
-                }
+                /*if (!_validateUserSession.HasAdmin())
+           {
+               return RedirectToRoute(new { controller = "Login", action = "Index" });
+           }*/
                 if (!ModelState.IsValid)
                 {
                     ViewBag.Rols = await _rolServices.GetAll();

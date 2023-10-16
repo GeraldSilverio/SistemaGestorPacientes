@@ -111,6 +111,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
                 }
+                await _labResultServices.DeleteByIdAppoinment(id);
                 await _medicalService.Delete(id);
                 return RedirectToRoute(new { controller = "Medical", action = "Index" });
             }

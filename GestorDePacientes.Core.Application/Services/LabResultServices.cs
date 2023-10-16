@@ -41,6 +41,11 @@ namespace GestorDePacientes.Core.Application.Services
             return viewModel;
         }
 
+        public async Task DeleteByIdAppoinment(int id)
+        {
+            await _labResultRepository.DeleteByIdAppoinment(id);
+        }
+
         public async Task<List<LabResultViewModel>> GetByFiltersAsync(FilterLabResultViewModel filter)
         {
             var labResults = await _labResultRepository.GetAllWithIncludeAsync(new List<string> { "Patient", "LabTests", "MedicalAppointment" });
