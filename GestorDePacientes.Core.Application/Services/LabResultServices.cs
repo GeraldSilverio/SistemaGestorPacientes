@@ -69,6 +69,22 @@ namespace GestorDePacientes.Core.Application.Services
 
             return result;
         }
+
+        public async Task<List<LabResultViewModel>> GetByIdAppoinment(int id)
+        {
+            var labResults = await _labResultRepository.GetAllWithIncludeAsync(new List<string> { "Patient", "LabTests", "MedicalAppointment" });
+
+            var result = labResults.Select(labResult => new LabResultViewModel
+            {
+                Id = labResult.Id,
+                LabTestName = labResult.LabTests.Name,
+                IsCompleted = labResult.IsCompleted,
+                IdMedicalAppoinment = labResult.MedicalAppointment.Id
+
+            }).Where(x => x.IdMedicalAppoinment == id).ToList();
+
+            return result;
+        }
     }
 
 }

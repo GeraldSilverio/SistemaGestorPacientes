@@ -163,13 +163,36 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 //Cambiando el estado a Pendiente de Resultados.
                 medicalCreated.IdAppoinmentStatus = await _appoinmetStatusService.GetAppoinmetIdbyName("PENDIENTE DE RESULTADOS");
                 await _medicalService.Update(medicalCreated, medicalCreated.Id);
-               
+
                 return RedirectToRoute(new { controller = "Medical", action = "Index" });
             }
             catch (Exception ex)
             {
                 return View(ex.Message);
             }
+        }
+
+        public async Task<IActionResult> Results(int id)
+        {
+            if (!_validateUserSession.HasAsis())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            var labResults = await _labResultServices.GetByIdAppoinment(id);
+            return View(labResults);
+        }
+
+        public async Task<IActionResult> ResultChange(int id)
+        {
+            if (!_validateUserSession.HasAsis())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            var medicalCreated = await _medicalService.GetById(id);
+            medicalCreated.IdAppoinmentStatus = await _appoinmetStatusService.GetAppoinmetIdbyName("COMPLETADA");
+
+            await _medicalService.Update(medicalCreated, medicalCreated.Id);
+            return RedirectToRoute(new { controller = "Medical", action = "Index" });
         }
     }
 }
