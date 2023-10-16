@@ -194,5 +194,14 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             await _medicalService.Update(medicalCreated, medicalCreated.Id);
             return RedirectToRoute(new { controller = "Medical", action = "Index" });
         }
+        public async Task<IActionResult> Completed(int id)
+        {
+            if (!_validateUserSession.HasAsis())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            var labResults = await _labResultServices.GetTestCompleted(id);
+            return View(labResults);
+        }
     }
 }

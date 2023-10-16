@@ -10,5 +10,6 @@
         public int IdLabTest { get; set; }
         public string? LabTestName { get; set; }
         public bool IsCompleted { get; set; }
+        public string? Comments { get; set; }
     }
 }
