@@ -73,6 +73,8 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 }
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Patients = await _patientService.GetAll();
+                    ViewBag.Doctors = await _doctorServices.GetAll();
                     return View("Create", vm);
                 }
                 vm.IdAppoinmentStatus = await _appoinmetStatusService.GetAppoinmetIdbyName("PENDIENTE DE CONSULTA");
@@ -150,9 +152,16 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
+
                 if (!_validateUserSession.HasAsis())
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
+
+                if (vm.IdLabTest == null)
+                {
+                    ViewBag.LabTest = await _labTestServices.GetAll();
+                    return View(vm);
                 }
                 vm.Id = 0;
                 await _labResultServices.Add(vm);
