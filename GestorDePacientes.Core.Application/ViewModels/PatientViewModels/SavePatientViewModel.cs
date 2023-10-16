@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GestorDePacientes.Core.Application.Validations;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestorDePacientes.Core.Application.ViewModels.PatientViewModels
@@ -13,6 +14,7 @@ namespace GestorDePacientes.Core.Application.ViewModels.PatientViewModels
         [Required(ErrorMessage = "Debe completar este campo")]
         public string PhoneNumber { get; set; } = null!;
         [Required(ErrorMessage = "Debe completar este campo")]
+        [PatientIdentificationValidation]
         public string Identification { get; set; } = null!;
         [Required(ErrorMessage = "Debe completar este campo")]
         public DateTime DateOfBorn { get; set; } = DateTime.Now;

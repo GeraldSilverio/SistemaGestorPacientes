@@ -36,5 +36,11 @@ namespace GestorDePacientes.Infrastructure.Persistence.Repositories
 
             return user;
         }
+
+        public bool ValidateEmail(string email)
+        {
+            var isCreated = _dbContext.Users.Any(x => x.Email == email);
+            return isCreated;
+        }
     }
 }

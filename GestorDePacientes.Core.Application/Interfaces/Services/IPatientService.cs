@@ -6,7 +6,7 @@ namespace GestorDePacientes.Core.Application.Interfaces.Services
 {
     public interface IPatientService : IGenericService<SavePatientViewModel, PatientViewModel, Patient>,IUploadFile
     {
-
+        bool ValidateIdentification(string identification);
     }
 
 

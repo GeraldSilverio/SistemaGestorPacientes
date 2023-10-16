@@ -29,7 +29,7 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.HasOne(x => x.MedicalAppointment)
             .WithMany(x => x.PatientLabTests)
             .HasForeignKey(x => x.IdMedicalAppoinment)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
 
 

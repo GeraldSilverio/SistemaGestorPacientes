@@ -20,19 +20,19 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
         public async Task<IActionResult> Index()
         {
-            /*if (!_validateUserSession.HasAdmin())
+            if (!_validateUserSession.HasAdmin())
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }*/
+            }
             return View(await _userServices.GetAllViewModelWithInclude());
         }
 
         public async Task<IActionResult> Create()
         {
-            /*if (!_validateUserSession.HasAdmin())
+            if (!_validateUserSession.HasAdmin())
             {
                 return RedirectToRoute(new { controller = "Login", action = "Index" });
-            }*/
+            }
             ViewBag.Rols = await _rolServices.GetAll();
             return View(new SaveUserViewModel());
         }
@@ -45,6 +45,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             }
             ViewBag.Rols = await _rolServices.GetAll();
             var entity = await _userServices.GetById(id);
+            entity.ConfirmPassword = entity.Password;
             return View("Create", entity);
         }
 
@@ -63,10 +64,10 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
-                /*if (!_validateUserSession.HasAdmin())
-           {
-               return RedirectToRoute(new { controller = "Login", action = "Index" });
-           }*/
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
                 if (!ModelState.IsValid)
                 {
                     ViewBag.Rols = await _rolServices.GetAll();
@@ -115,8 +116,9 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 }
                 if (!ModelState.IsValid)
                 {
+
                     var userExisted = await _userServices.GetById(vm.Id);
-                    if ((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName))
+                    if ((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName) || (vm.Id == userExisted.Id) && (vm.Email == userExisted.Email))
                     {
                         await _userServices.Update(vm, vm.Id);
                         return RedirectToRoute(new { controller = "User", action = "Index" });
@@ -133,6 +135,44 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 return View("Index", ex.Message);
             }
+        }
+
+        public async Task<IActionResult> ChangePassword(int id)
+        {
+            try
+            {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                }
+                var userCreated = await _userServices.GetById(id);
+                var changePassword = new ChangePasswordViewModel();
+                changePassword.Id = userCreated.Id;
+                return View(changePassword);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel vm)
+        {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+            if (!await _userServices.ChangePassword(vm))
+            {
+                return View(vm);
+            }
+            return RedirectToRoute(new { controller = "User", action = "Index" });
         }
     }
 }
