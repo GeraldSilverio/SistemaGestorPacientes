@@ -1,6 +1,7 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Repositories;
 using GestorDePacientes.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace GestorDePacientes.Infrastructure.Persistence.Repositories
 {
@@ -54,6 +55,11 @@ namespace GestorDePacientes.Infrastructure.Persistence.Repositories
             var entry = await _dbContext.Set<TEntity>().FindAsync(id);
             _dbContext.Entry(entry).CurrentValues.SetValues(entity);
             await _dbContext.SaveChangesAsync();
+        }
+        //AGREGE ESTE METODO, QUE SE SIRVE PARA LAS VALIDACIONES.LA MAYORIA DE LOS REPO LO USAN.
+        public bool Any(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _dbContext.Set<TEntity>().Any(predicate);
         }
     }
 }

@@ -1,19 +1,20 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestorDePacientes.Core.Application.Validations
 {
-    public class UserNameValidation:ValidationAttribute
+    public class RolValidations : ValidationAttribute
     {
-
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var userServices = validationContext.GetService(typeof(IUserServices)) as IUserServices;
-            var userName = (string)value;
+            var rolServices = validationContext.GetService(typeof(IRolServices)) as IRolServices;
 
-            if (userServices.ValidateUserName(userName))
+            var name = (string)value;
+
+            if (rolServices.Any(rol => rol.Name == name))
             {
-                return new ValidationResult("ESTE NOMBRE DE USUARIO ESTA EN USO, INGRESE OTRO POR FAVOR.");
+                return new ValidationResult("ESTE ROL YA ESTA EXISTE");
             }
 
             return ValidationResult.Success;

@@ -74,15 +74,5 @@ namespace GestorDePacientes.Core.Application.Services
             };
             return userVw;
         }
-
-        public bool ValidateEmail(string email)
-        {
-            return _userRepository.ValidateEmail(email);
-        }
-
-        public bool ValidateUserName(string userName)
-        {
-            return _userRepository.ValidateUserName(userName);
-        }
     }
 }

@@ -58,11 +58,6 @@ namespace GestorDePacientes.Core.Application.Services
             }
             return $"{basePath}/{fileName}";
         }
-
-        public  bool ValidateIdentification(string identification)
-        {
-             return _patientRepository.ValidateIdentification(identification);
-        }
     }
 
 }

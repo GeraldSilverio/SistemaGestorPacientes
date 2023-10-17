@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GestorDePacientes.Core.Application.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewModels
 {
@@ -6,6 +7,7 @@ namespace GestorDePacientes.Core.Application.ViewModels.AppoinmentStatusViewMode
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="ESTE CAMPO ES OBLIGATORIO")]
+        [AppoinmentStatusValidations]
         public string Description { get; set; } = null!;
     }
 }

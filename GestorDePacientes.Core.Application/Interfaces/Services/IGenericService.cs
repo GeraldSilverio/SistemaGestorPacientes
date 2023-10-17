@@ -1,4 +1,6 @@
-﻿namespace GestorDePacientes.Core.Application.Interfaces.Services
+﻿using System.Linq.Expressions;
+
+namespace GestorDePacientes.Core.Application.Interfaces.Services
 {
     public interface IGenericService<SaveViewModel, ViewModel, Model>
         where SaveViewModel : class
@@ -10,5 +12,6 @@
         Task Delete(int id);
         Task<SaveViewModel> GetById(int id);
         Task<List<ViewModel>> GetAll();
+        bool Any(Expression<Func<Model, bool>> predicate);
     }
 }

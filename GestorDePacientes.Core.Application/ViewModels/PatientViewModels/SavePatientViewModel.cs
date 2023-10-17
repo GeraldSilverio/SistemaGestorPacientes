@@ -14,7 +14,7 @@ namespace GestorDePacientes.Core.Application.ViewModels.PatientViewModels
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
         public string PhoneNumber { get; set; } = null!;
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
-        [PatientIdentificationValidation]
+        [PatientValidations]
         public string Identification { get; set; } = null!;
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
         public DateTime DateOfBorn { get; set; } = DateTime.Now;

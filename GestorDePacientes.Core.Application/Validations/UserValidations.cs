@@ -1,21 +1,25 @@
 ﻿using GestorDePacientes.Core.Application.Interfaces.Services;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestorDePacientes.Core.Application.Validations
 {
-    public class UserEmailValidation:ValidationAttribute
+    public class UserValidations : ValidationAttribute
     {
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             var userServices = validationContext.GetService(typeof(IUserServices)) as IUserServices;
+
+            var userName = (string)value;
+
+            if (userServices.Any(user => user.UserName == userName))
+            {
+                return new ValidationResult("ESTE NOMBRE DE USUARIO ESTA EN USO, INGRESE OTRO POR FAVOR.");
+            }
+
             var email = (string)value;
 
-            if (userServices.ValidateEmail(email))
+            if (userServices.Any(user => user.Email == email))
             {
                 return new ValidationResult("ESTE EMAIL YA ESTA EN USO, INGRESE OTRO POR FAVOR");
             }

@@ -46,7 +46,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             try
             {
-
+                vm.Description = vm.Description.Trim();
                 if (!_validateUserSession.HasAdmin())
                 {
                     return RedirectToRoute(new { controller = "Login", action = "Index" });

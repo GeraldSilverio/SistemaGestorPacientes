@@ -15,11 +15,11 @@ namespace GestorDePacientes.Core.Application.ViewModels.UserViewModels
         public string LastName { get; set; } = null!;
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
         [DataType(DataType.Text)]
-        [UserEmailValidation]
+        [UserValidations]
         public string Email { get; set; } = null!;
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
         [DataType(DataType.Text)]
-        [UserNameValidation]
+        [UserValidations]
         public string UserName { get; set; } = null!;
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
 
