@@ -20,7 +20,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAsis())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             return View(await _patientService.GetAll());
         }
@@ -29,7 +29,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAsis())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             return View(new SavePatientViewModel());
         }
@@ -41,7 +41,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -68,7 +68,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAsis())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             var patient = await _patientService.GetById(id);
             return View("Create", patient);
@@ -81,7 +81,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -116,7 +116,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var patient = await _patientService.GetById(id);
                 return View("Delete", patient);
@@ -134,7 +134,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 await _patientService.Delete(id);
                 return RedirectToRoute(new { controller = "Patient", action = "Index" });

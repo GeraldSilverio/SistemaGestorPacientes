@@ -20,7 +20,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             var labTests = await _labTestsServices.GetAll();
             return View(labTests);
@@ -30,7 +30,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             return View(new SaveLabTestViewModel());
         }
@@ -41,7 +41,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -63,7 +63,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var labTest = await _labTestsServices.GetById(id);
                 return View("Create", labTest);
@@ -81,7 +81,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -101,7 +101,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var labTest = await _labTestsServices.GetById(id);
                 return View("Delete", labTest);
@@ -119,7 +119,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 await _labTestsServices.Delete(id);
                 return RedirectToRoute(new { controller = "LabTests", action = "Index" });

@@ -33,7 +33,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 return View(await _medicalService.GetAllViewModelWithInclude());
             }
@@ -50,7 +50,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 ViewBag.Patients = await _patientService.GetAll();
                 ViewBag.Doctors = await _doctorServices.GetAll();
@@ -69,7 +69,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -94,7 +94,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var medical = await _medicalService.GetById(id);
                 return View("Delete", medical);
@@ -111,7 +111,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 await _labResultServices.DeleteByIdAppoinment(id);
                 await _medicalService.Delete(id);
@@ -129,7 +129,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
 
                 //Pruebas de laboratorio disponibles
@@ -155,7 +155,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (!_validateUserSession.HasAsis())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
 
                 if (vm.IdLabTest == null)
@@ -186,7 +186,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAsis())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             var labResults = await _labResultServices.GetByIdAppoinment(id);
             return View(labResults);
@@ -196,7 +196,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAsis())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             var medicalCreated = await _medicalService.GetById(id);
             medicalCreated.IdAppoinmentStatus = await _appoinmetStatusService.GetAppoinmetIdbyName("COMPLETADA");
@@ -208,9 +208,9 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAsis())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
-            var labResults = await _labResultServices.GetTestCompleted(id);
+            var labResults = await _labResultServices.GetByIdAppoinment(id);
             return View(labResults);
         }
     }

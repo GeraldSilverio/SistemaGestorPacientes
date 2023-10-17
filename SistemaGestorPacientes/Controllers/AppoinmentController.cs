@@ -21,7 +21,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var appoinmets = await _appoinmetStatusService.GetAll();
                 return View(appoinmets);
@@ -37,7 +37,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             return View(new SaveAppoinmentViewModel());
         }
@@ -49,7 +49,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
                 vm.Description = vm.Description.Trim();
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -71,7 +71,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var appoinment = await _appoinmetStatusService.GetById(id);
                 return View("Create", appoinment);
@@ -89,7 +89,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -113,7 +113,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 var appoinment = await _appoinmetStatusService.GetById(id);
                 return View("Delete", appoinment);
@@ -132,7 +132,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 await _appoinmetStatusService.Delete(id);
                 return RedirectToRoute(new { controller = "Appoinment", action = "Index" });

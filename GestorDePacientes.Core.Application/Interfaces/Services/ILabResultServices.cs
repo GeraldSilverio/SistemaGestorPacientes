@@ -8,6 +8,5 @@ namespace GestorDePacientes.Core.Application.Interfaces.Services
         Task<List<LabResultViewModel>> GetByFiltersAsync(FilterLabResultViewModel filter);
         Task DeleteByIdAppoinment(int id);
         Task<List<LabResultViewModel>> GetByIdAppoinment(int id);
-        Task<List<LabResultViewModel>> GetTestCompleted(int id);
     }
 }

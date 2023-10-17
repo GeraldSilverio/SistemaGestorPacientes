@@ -16,26 +16,32 @@
                     <h4>PRUEBAS DISPONIBLES PARA ASIGNAR</h4>
                 </div>
                 <div class="card-body">
-                    @Html.ValidationSummary(false,"",new{@class = "text-danger"})
-                    <form method="post" asp-controller="Medical" asp-action="Consultar">
-                        @foreach (var item in ViewBag.LabTest)
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input"
-                                       type="checkbox"
-                                       value="@item.Id"
-                                       name="IdLabTest"
-                                       id="IdLabTest">
-                                <label class="col-form-label" for="IdLabTest">
-                                    @item.Name
-                                </label>
-                            </div>
-                        }
-                        
-                        <input type="hidden" asp-for="IdMedicalAppoinment"/>
-                        <button type="submit" class="btn btn-primary float-end ms-2">Crear</button>
-                        <button asp-controller="Medical" asp-action="Index" class="btn btn-warning float-end ms-2">Volver</button>
-                    </form>
+                    @if(ViewBag.LabTest.Count != 0)
+                    {
+                        @Html.ValidationSummary(false,"",new{@class = "text-danger"})
+                        <form method="post" asp-controller="Medical" asp-action="Consultar">
+                            @foreach (var item in ViewBag.LabTest)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           value="@item.Id"
+                                           name="IdLabTest"
+                                           id="IdLabTest">
+                                    <label class="col-form-label" for="IdLabTest">
+                                        @item.Name
+                                    </label>
+                                </div>
+                            }
+
+                            <input type="hidden" asp-for="IdMedicalAppoinment" />
+                            <button type="submit" class="btn btn-primary float-end ms-2">Crear</button>
+                        </form>
+                    }else
+                    {
+                      <h4>NO HAY PRUEBAS DISPONIBLES PARA CONSULTAR</h4>
+                    }
+                    <a class="btn btn-warning float-end" asp-controller="Medical" asp-action="Index">VOLVER</a>
 
 
                 </div>
