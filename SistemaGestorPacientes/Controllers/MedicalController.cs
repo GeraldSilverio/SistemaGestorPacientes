@@ -160,6 +160,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
 
                 if (vm.IdLabTest == null)
                 {
+                    ModelState.AddModelError("medicalValidation", "DEBE SELECCIONAR AL MENOS UNA PRUEBA");
                     ViewBag.LabTest = await _labTestServices.GetAll();
                     return View(vm);
                 }

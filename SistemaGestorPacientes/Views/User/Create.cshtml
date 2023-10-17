@@ -74,7 +74,7 @@
                         <div class="mb-3">
                             <label asp-for="IdRol" class="form-label">Rol del Usuario: </label>
                             <select asp-for="IdRol" class="form-select">
-                                <option selected>Rol del Usuario</option>
+                                <option selected value="0">Rol del Usuario</option>
                                 @foreach (RolViewModel rol in ViewBag.Rols)
                                 {
                                     <option asp-for="IdProduction" value="@rol.Id">@rol.Name</option>

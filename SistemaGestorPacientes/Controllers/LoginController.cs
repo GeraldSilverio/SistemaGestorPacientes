@@ -39,7 +39,7 @@ namespace SistemaGestorPacientes.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("userValidation", "Datos de acceso incorrectos");
+                    ModelState.AddModelError("userValidation", "DATOS DE ACCESO INCORRECTOS");
                 }
 
                 return View("Index", vm);

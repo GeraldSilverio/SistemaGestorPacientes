@@ -170,6 +170,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             }
             if (!await _userServices.ChangePassword(vm))
             {
+                ModelState.AddModelError("userValidation", "LA CONTRASEÑA ANTIGUA NO ES CORRECTA,INGRESE LA VERDADERA");
                 return View(vm);
             }
             return RedirectToRoute(new { controller = "User", action = "Index" });

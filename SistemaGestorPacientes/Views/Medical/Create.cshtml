@@ -23,7 +23,7 @@
                         <div class="mb-3">
                             <label asp-for="IdPatient" class="form-label">Seleccione al Paciente: </label>
                             <select asp-for="IdPatient" class="form-select">
-                                <option selected>Seleccione al Paciente</option>
+                                <option selected value="0"> Seleccione al Paciente</option>
                                 @foreach (var patient in ViewBag.Patients)
                                 {
                                     <option asp-for="IdProduction" value="@patient.Id">@patient.Name</option>
@@ -35,7 +35,7 @@
                         <div class="mb-3">
                             <label asp-for="IdDoctor" class="form-label">Seleccione al Doctor: </label>
                             <select asp-for="IdDoctor" class="form-select">
-                                <option selected>Seleccione al Doctor</option>
+                                <option selected value="0">Seleccione al Doctor</option>
                                 @foreach (var doctor in ViewBag.Doctors)
                                 {
                                     <option asp-for="IdProduction" value="@doctor.Id">@doctor.Name</option>
