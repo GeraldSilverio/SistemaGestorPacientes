@@ -1,0 +1,41 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.LabResultViewModels;
+
+@model List<LabResultViewModel>
+
+@{
+    ViewData["Title"] = "User Home";
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header text-light bg-primary">
+                    <h3 class="text-center">RESULTADOS DE LAS PRUEBAS INDICADAS</h3>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">PRUEBA INDICADA</th>
+                                    <th scope="col">COMENTARIOS DE LA PRUEBA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Where(x => x.IsCompleted == true))
+                                {
+                                    <tr>
+                                        <td>@item.LabTestName</td>
+                                        <td>@item.Comments</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <a class="btn btn-warning float-end" asp-controller="Medical" asp-action="Index">VOLVER</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

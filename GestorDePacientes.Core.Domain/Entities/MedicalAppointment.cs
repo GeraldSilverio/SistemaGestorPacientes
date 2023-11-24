@@ -20,5 +20,7 @@ namespace GestorDePacientes.Core.Domain.Entities
         public int IdDoctor { get; set; }
         public Doctor Doctor { get; set; } = null!;
 
+        //Relacion con tabla LabTest.
+        public ICollection<PatientLabTests> PatientLabTests { get; set; } = null!;
     }
 }

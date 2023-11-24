@@ -46,23 +46,35 @@
                             <span asp-validation-for="UserName" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label">Contraseña: </label>
-                            <input type="text" step="any" asp-for="Password" class="form-control" autocomplete="off" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
+                        @if (editMode)
+                        {
+                            <input type="hidden" asp-for="Password"/>
+                            <input type="hidden" asp-for="ConfirmPassword"/>
+                        }
+                        else
+
+                        {
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label">Contraseña: </label>
+                                <input type="text" step="any" asp-for="Password" class="form-control" autocomplete="off" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
 
 
-                        <div class="mb-3">
-                            <label asp-for="ConfirmPassword" class="form-label">Confirmar Contraseña: </label>
-                            <input type="text" step="any" asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
+                            <div class="mb-3">
+                                <label asp-for="ConfirmPassword" class="form-label">Confirmar Contraseña: </label>
+                                <input type="text" step="any" asp-for="ConfirmPassword" class="form-control" autocomplete="off" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        }
+
+
+
 
                         <div class="mb-3">
                             <label asp-for="IdRol" class="form-label">Rol del Usuario: </label>
                             <select asp-for="IdRol" class="form-select">
-                                <option selected>Rol del Usuario</option>
+                                <option selected value="0">Rol del Usuario</option>
                                 @foreach (RolViewModel rol in ViewBag.Rols)
                                 {
                                     <option asp-for="IdProduction" value="@rol.Id">@rol.Name</option>

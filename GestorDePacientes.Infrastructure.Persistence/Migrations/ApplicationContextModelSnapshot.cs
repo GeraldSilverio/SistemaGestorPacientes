@@ -49,6 +49,29 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppoinmentStatus", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Creaty = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "PENDIENTE DE CONSULTA",
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Creaty = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "PENDIENTE DE RESULTADOS",
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Creaty = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "COMPLETADA",
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("GestorDePacientes.Core.Domain.Entities.Doctor", b =>
@@ -250,7 +273,6 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comments")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Creaty")
@@ -260,6 +282,9 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdLabTests")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdMedicalAppoinment")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPatient")
@@ -277,6 +302,8 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdLabTests");
+
+                    b.HasIndex("IdMedicalAppoinment");
 
                     b.HasIndex("IdPatient");
 
@@ -310,6 +337,22 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Rol", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Creaty = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "ADMINISTRADOR"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Creaty = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastModified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "ASISTENTE"
+                        });
                 });
 
             modelBuilder.Entity("GestorDePacientes.Core.Domain.Entities.User", b =>
@@ -403,6 +446,12 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("GestorDePacientes.Core.Domain.Entities.MedicalAppointment", "MedicalAppointment")
+                        .WithMany("PatientLabTests")
+                        .HasForeignKey("IdMedicalAppoinment")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("GestorDePacientes.Core.Domain.Entities.Patient", "Patient")
                         .WithMany("PatientLabTests")
                         .HasForeignKey("IdPatient")
@@ -410,6 +459,8 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("LabTests");
+
+                    b.Navigation("MedicalAppointment");
 
                     b.Navigation("Patient");
                 });
@@ -436,6 +487,11 @@ namespace GestorDePacientes.Infrastructure.Persistence.Migrations
                 });
 
             modelBuilder.Entity("GestorDePacientes.Core.Domain.Entities.LabTests", b =>
+                {
+                    b.Navigation("PatientLabTests");
+                });
+
+            modelBuilder.Entity("GestorDePacientes.Core.Domain.Entities.MedicalAppointment", b =>
                 {
                     b.Navigation("PatientLabTests");
                 });

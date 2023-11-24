@@ -1,0 +1,61 @@
+﻿@using GestorDePacientes.Core.Application.ViewModels.LabResultViewModels;
+
+
+@model List<LabResultViewModel>
+
+@{
+    ViewData["Title"] = "User Home";
+}
+<div class="container-fluid">
+
+    <div class="row">
+        <form class="row g-3" asp-controller="LabResults" asp-action="Index">
+            <div class="col-auto">
+                <input type="text" class="form-control" id="Identification" name="Identification"
+                       placeholder="Filtrar por Cedula">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Filtrar por Cedula</button>
+            </div>
+        </form>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header text-light bg-primary">
+                    <h3 class="text-center">LISTADO DE RESULTADOS DE LABORATORIOS</h3>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col">Paciente</th>
+                                    <th scope="col">Paciente Cedula</th>
+                                    <th scope="col">Nombre Prueba</th>
+                                    <th scope="col">Acciones</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.PatientName</td>
+                                        <td>@item.PatientIdentification</td>
+                                        <td>@item.LabTestName</td>
+                                        <td>
+                                            <a class="btn btn-warning " asp-controller="LabResults" asp-action="Report" asp-route-id="@item.Id">REPORTAR RESULTADOS</a>
+                                        </td>
+                                    </tr>
+                                }
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

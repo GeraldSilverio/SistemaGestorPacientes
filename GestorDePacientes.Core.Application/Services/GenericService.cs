@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GestorDePacientes.Core.Application.Interfaces.Repositories;
 using GestorDePacientes.Core.Application.Interfaces.Services;
+using System.Linq.Expressions;
 
 namespace GestorDePacientes.Core.Application.Services
 {
@@ -50,6 +51,10 @@ namespace GestorDePacientes.Core.Application.Services
         {
             Model entity = _mapper.Map<Model>(viewModel);
             await _repositoryAsync.UpdateAsync(entity, id);
+        }
+        public virtual bool Any(Expression<Func<Model, bool>> predicate)
+        {
+            return  _repositoryAsync.Any(predicate);
         }
     }
 }

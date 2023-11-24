@@ -3,20 +3,26 @@ using GestorDePacientes.Core.Application.ViewModels.UserViewModels;
 using Microsoft.AspNetCore.Mvc;
 using GestorDePacientes.Core.Application.Helpers;
 using Microsoft.AspNetCore.Http;
+using WebApp.SistemaGestorPacientes.Middlewares;
 
 namespace SistemaGestorPacientes.Controllers
 {
     public class LoginController : Controller
     {
         private readonly IUserServices _userServices;
-
-        public LoginController(IUserServices userServices)
+        private readonly ValidateUserSession _validateUserSession;
+        public LoginController(IUserServices userServices, ValidateUserSession validateUserSession)
         {
             _userServices = userServices;
+            _validateUserSession = validateUserSession;
         }
 
         public IActionResult Index()
         {
+            if (_validateUserSession.HasAsis() || _validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
             return View();
         }
 
@@ -39,7 +45,7 @@ namespace SistemaGestorPacientes.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("userValidation", "Datos de acceso incorrectos");
+                    ModelState.AddModelError("userValidation", "DATOS DE ACCESO INCORRECTOS");
                 }
 
                 return View("Index", vm);

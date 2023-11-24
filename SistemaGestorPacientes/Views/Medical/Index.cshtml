@@ -48,13 +48,13 @@
                                             @switch (item.StatustName)
                                             {
                                                 case "PENDIENTE DE CONSULTA":
-                                                    <a class="btn btn-warning" asp-controller="Medical" asp-action="Update" asp-route-id="@item.IdPatient">CONSULTAR</a>
+                                                    <a class="btn btn-warning" asp-controller="Medical" asp-action="Consultar" asp-route-id="@item.Id">CONSULTAR</a>
                                                     break;
                                                 case "PENDIENTE DE RESULTADOS":
-                                                    <a class="btn btn-warning" asp-controller="Medical" asp-action="Update" asp-route-id="@item.IdPatient">RESULTADOS</a>
+                                                    <a class="btn btn-warning" asp-controller="Medical" asp-action="Results" asp-route-id="@item.Id">PEN.RESULTADOS</a>
                                                     break;
                                                 case "COMPLETADA":
-                                                    <a class="btn btn-warning" asp-controller="Medical" asp-action="Update" asp-route-id="@item.IdPatient">VER RESULTADOS</a>
+                                                    <a class="btn btn-warning" asp-controller="Medical" asp-action="Completed" asp-route-id="@item.Id">VER RESULTADOS</a>
                                                     break;
 
                                             }

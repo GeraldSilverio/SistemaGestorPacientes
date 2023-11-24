@@ -12,6 +12,12 @@ namespace GestorDePacientes.Infrastructure.Persistence.EntityConfigurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.LastModifiedBy).IsRequired(false);
             builder.Property(x => x.CreatyBy).IsRequired(false);
+            //Datos que se crearan solos, asi no tendra que comenzar a crear estados de citas.
+            builder.HasData(
+                new AppoinmentStatus { Id = 1,Description= "PENDIENTE DE CONSULTA" },
+                new AppoinmentStatus { Id = 2,Description= "PENDIENTE DE RESULTADOS" },
+                new AppoinmentStatus { Id = 3,Description= "COMPLETADA" }
+                );
         }
     }
 }

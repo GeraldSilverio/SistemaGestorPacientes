@@ -1,4 +1,6 @@
-﻿namespace GestorDePacientes.Core.Application.Interfaces.Repositories
+﻿using System.Linq.Expressions;
+
+namespace GestorDePacientes.Core.Application.Interfaces.Repositories
 {
     public interface IGenericRepositoryAsync<TEntity> where TEntity : class
     {
@@ -8,6 +10,7 @@
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(int id);
         Task<List<TEntity>> GetAllWithIncludeAsync(List<string> properties);
+        bool Any(Expression<Func<TEntity, bool>> predicate);
 
     }
 }

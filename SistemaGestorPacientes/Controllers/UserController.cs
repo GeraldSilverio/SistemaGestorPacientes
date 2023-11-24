@@ -22,7 +22,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             return View(await _userServices.GetAllViewModelWithInclude());
         }
@@ -31,7 +31,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             ViewBag.Rols = await _rolServices.GetAll();
             return View(new SaveUserViewModel());
@@ -41,10 +41,11 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             ViewBag.Rols = await _rolServices.GetAll();
             var entity = await _userServices.GetById(id);
+            entity.ConfirmPassword = entity.Password;
             return View("Create", entity);
         }
 
@@ -52,7 +53,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
         {
             if (!_validateUserSession.HasAdmin())
             {
-                return RedirectToRoute(new { controller = "Login", action = "Index" });
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
             }
             var entity = await _userServices.GetById(id);
             return View("Delete", entity);
@@ -65,7 +66,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
@@ -91,7 +92,7 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 await _userServices.Delete(id);
                 return RedirectToRoute(new { controller = "User", action = "Index" });
@@ -111,12 +112,13 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 if (!_validateUserSession.HasAdmin())
                 {
-                    return RedirectToRoute(new { controller = "Login", action = "Index" });
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
                 }
                 if (!ModelState.IsValid)
                 {
+
                     var userExisted = await _userServices.GetById(vm.Id);
-                    if ((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName))
+                    if ((vm.Id == userExisted.Id) && (vm.UserName == userExisted.UserName) || (vm.Id == userExisted.Id) && (vm.Email == userExisted.Email))
                     {
                         await _userServices.Update(vm, vm.Id);
                         return RedirectToRoute(new { controller = "User", action = "Index" });
@@ -133,6 +135,44 @@ namespace WebApp.SistemaGestorPacientes.Controllers
             {
                 return View("Index", ex.Message);
             }
+        }
+
+        public async Task<IActionResult> ChangePassword(int id)
+        {
+            try
+            {
+                if (!_validateUserSession.HasAdmin())
+                {
+                    return RedirectToRoute(new { controller = "Home", action = "Index" });
+                }
+                var userCreated = await _userServices.GetById(id);
+                var changePassword = new ChangePasswordViewModel();
+                changePassword.Id = userCreated.Id;
+                return View(changePassword);
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel vm)
+        {
+            if (!_validateUserSession.HasAdmin())
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+            if (!await _userServices.ChangePassword(vm))
+            {
+                ModelState.AddModelError("userValidation", "LA CONTRASEÑA ANTIGUA NO ES CORRECTA,INGRESE LA VERDADERA");
+                return View(vm);
+            }
+            return RedirectToRoute(new { controller = "User", action = "Index" });
         }
     }
 }

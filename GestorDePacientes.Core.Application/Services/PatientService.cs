@@ -9,8 +9,10 @@ namespace GestorDePacientes.Core.Application.Services
 {
     public class PatientService : GenericService<SavePatientViewModel, PatientViewModel, Patient>, IPatientService
     {
+        private readonly IPatientReposity _patientRepository;
         public PatientService(IMapper mapper, IPatientReposity patientRepository) : base(mapper, patientRepository)
         {
+            _patientRepository = patientRepository;
         }
        
         public string UplpadFile(IFormFile file, int id, bool isEditMode = false, string imagePath = "")

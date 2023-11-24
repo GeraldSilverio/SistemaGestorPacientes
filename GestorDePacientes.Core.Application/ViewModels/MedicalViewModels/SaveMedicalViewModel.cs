@@ -6,9 +6,9 @@ namespace GestorDePacientes.Core.Application.ViewModels.MedicalViewModels
     {
 
         public int Id { get; set; }
-        [Range(1, int.MaxValue, ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
+        [Range(1, int.MaxValue, ErrorMessage = "DEBE SELECCIONAR UN PACIENTE")]
         public int IdPatient { get; set; }
-        [Range(1, int.MaxValue, ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
+        [Range(1, int.MaxValue, ErrorMessage = "DEBE SELECCIONAR UN DOCTOR")]
         public int IdDoctor { get; set; }
         public int IdAppoinmentStatus { get; set; }
         [Required(ErrorMessage = "ESTE CAMPO ES OBLIGATORIO")]
